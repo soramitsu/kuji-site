@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f7f5ef" />
+    <title>KUJI クジ | On-device endpoint intelligence by SORAMITSU</title>
+    <meta
+      name="description"
+      content="KUJI brings file analysis, behavioral detection and local machine learning to offline endpoints. Explore the system and replay a ransomware simulation."
+    />
+    <meta property="og:title" content="KUJI · On-device AI. Even offline." />
+    <meta
+      property="og:description"
+      content="Explore SORAMITSU’s offline endpoint system and replay its ransomware simulation."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="assets/sora-semibold.woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="page.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="mast">
+      <a href="#top" aria-label="KUJI home"
+        ><img
+          class="lockup"
+          src="assets/lockup.svg"
+          width="118"
+          height="44"
+          alt="KUJI クジ"
+      /></a>
+      <nav aria-label="Main navigation">
+        <a href="#system">How it works</a><a href="#demo">Demo</a
+        ><a
+          class="nav-contact"
+          href="mailto:service@soramitsu.co.jp?subject=KUJI%20enquiry"
+          >Contact</a
+        >
+      </nav>
+    </header>
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div
+          class="hero-art"
+          role="img"
+          aria-label="KUJI’s nine engraved strokes in black ink, lifted above a vermilion sun and fine contour lines."
+        >
+          <div class="field">
+            <div class="sun"></div>
+            <img
+              class="terrain"
+              src="assets/engraving.svg"
+              width="960"
+              height="620"
+              alt=""
+            />
+            <div class="block">
+              <i class="edge shadow"></i><i class="edge thickness"></i
+              ><i class="edge bevel"></i>
+              <img
+                class="face"
+                src="assets/mark.svg"
+                alt=""
+                width="358"
+                height="376"
+                fetchpriority="high"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="red-rule"></span>Endpoint security by SORAMITSU
+          </p>
+          <h1 id="hero-title">
+            On-device AI<span>.</span><br />Even offline<span>.</span>
+          </h1>
+          <p class="intro">
+            KUJI examines files and follows what programs do. Its models run on
+            the machine, even when the network is out of reach.
+          </p>
+          <a class="button primary" href="#demo"
+            ><span class="play" aria-hidden="true"></span>Explore the demo</a
+          >
+        </div>
+        <div class="hero-foot">
+          <span>Linux <b>·</b> macOS <b>·</b> Windows</span
+          ><span class="signature" lang="ja">臨 兵 闘 者 皆 陣 列 在 前</span>
+        </div>
+      </section>
+
+      <section class="system" id="system" aria-labelledby="system-title">
+        <div class="system-photo">
+          <img
+            src="assets/workstation.webp"
+            alt="An operator at a workstation beside an equipment rack."
+            width="1000"
+            height="1000"
+            loading="lazy"
+          />
+        </div>
+        <div class="system-copy">
+          <p class="section-label">On-device analysis</p>
+          <h2 id="system-title">
+            What makes a<br />program suspicious<span>?</span>
+          </h2>
+          <dl class="evidence">
+            <div>
+              <dt>Inside the file</dt>
+              <dd>
+                KUJI checks executable structure and byte patterns against
+                detection rules. For Mach-O files, a local model adds a risk
+                score.
+              </dd>
+            </div>
+            <div>
+              <dt>While it runs</dt>
+              <dd>
+                Related events can tell a different story than a single file.
+                KUJI looks for patterns such as documents being rewritten while
+                a related process targets backups.
+              </dd>
+            </div>
+            <div>
+              <dt>On this machine</dt>
+              <dd>
+                A backup tool contacting an unfamiliar server gives
+                investigators a lead. KUJI learns local relationships after a
+                delay and excludes activity linked to incidents.
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="demo" id="demo" aria-labelledby="demo-title">
+        <div class="demo-copy">
+          <p class="section-label">Behavioral detection</p>
+          <h2 id="demo-title">
+            Replay a<br />ransomware pattern<span>.</span>
+          </h2>
+          <p>
+            Watch a recorded run of KUJI’s offline demo. A program rewrites
+            documents across several folders while a related process targets
+            backups.
+          </p>
+          <p>
+            KUJI connects the activity and reports two critical findings. All
+            294 events are simulated.
+          </p>
+          <div class="command">
+            <span>With KUJI installed, run it yourself</span>
+            <div>
+              <code id="command">kuji sim ransomware_fast</code
+              ><button id="copy" type="button" hidden>Copy</button>
+            </div>
+            <span id="copy-status" class="sr-only" role="status"></span>
+          </div>
+        </div>
+        <div class="playback" aria-label="Recorded KUJI simulation">
+          <div class="playback-head">
+            <span>KUJI / Simulation</span><span class="rec">Recorded</span>
+          </div>
+          <div class="playback-body">
+            <span class="scenario">Scenario</span>
+            <h3>ransomware_fast</h3>
+            <div class="signal" aria-hidden="true"></div>
+            <div class="record">
+              <div class="event">
+                <span>Critical</span>
+                <p>Backups or recovery are being destroyed</p>
+              </div>
+              <div class="event">
+                <span>Critical</span>
+                <p>Possible destructive file activity</p>
+              </div>
+            </div>
+          </div>
+          <div class="player-controls">
+            <button id="replay" hidden type="button">
+              <span class="play" aria-hidden="true"></span
+              ><span class="replay-label">Play sequence</span>
+            </button>
+            <p id="play-status" role="status">294 events · 2 findings</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="scan" aria-labelledby="scan-title">
+        <div class="scan-copy">
+          <p class="section-label">The local app</p>
+          <h2 id="scan-title">A scan starts<br />right here<span>.</span></h2>
+          <p>
+            A quick scan covers Downloads, the desktop, temporary files and
+            startup locations. Choose a full scan to check local disks. The app
+            reports findings and tells you where coverage is incomplete.
+          </p>
+        </div>
+        <figure class="app-view">
+          <img
+            src="assets/kuji-app.webp"
+            alt="The KUJI app’s Status screen with Quick scan and Full scan controls."
+            width="610"
+            height="728"
+            loading="lazy"
+          />
+          <figcaption>KUJI desktop app <span>/</span> Status view</figcaption>
+        </figure>
+      </section>
+
+      <section class="updates" aria-labelledby="updates-title">
+        <div class="update-copy">
+          <p class="section-label">Air-gapped updates</p>
+          <h2 id="updates-title">
+            Carry the update<br />across the gap<span>.</span>
+          </h2>
+          <p>
+            Bring a signed release in on removable media, or distribute it
+            through an internal share or portal. KUJI checks signatures from
+            both SORAMITSU and your organization before it accepts the release.
+          </p>
+        </div>
+        <div class="media-photo">
+          <img
+            src="assets/media.webp"
+            width="1000"
+            height="1000"
+            loading="lazy"
+            alt="A removable USB drive with a vermilion cord."
+          />
+        </div>
+      </section>
+      <section class="contact" aria-label="Contact SORAMITSU">
+        <div>
+          <p class="section-label">KUJI by SORAMITSU</p>
+          <h2>Bring KUJI to your team<span>.</span></h2>
+        </div>
+        <a
+          class="button primary"
+          href="mailto:service@soramitsu.co.jp?subject=KUJI%20enquiry"
+          >Contact SORAMITSU</a
+        >
+      </section>
+    </main>
+    <footer>
+      <a href="#top"
+        ><img
+          src="assets/lockup.svg"
+          width="91"
+          height="34"
+          alt="KUJI home" /></a
+      ><a href="https://soramitsu.co.jp/">SORAMITSU</a>
+    </footer>
+  </body>
+</html>
