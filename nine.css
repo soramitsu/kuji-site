@@ -1,0 +1,218 @@
+.nine {
+  padding: clamp(58px, 6.5vw, 112px) var(--pad, clamp(22px, 6.3vw, 110px));
+  color: var(--on-light, #0c0c0e);
+  background: var(--washi, #f8f7f4);
+  font-family: var(--sans, Sora, Arial, sans-serif);
+}
+.nine *,
+.nine *::before,
+.nine *::after {
+  box-sizing: border-box;
+}
+.nine-layout {
+  max-width: 1540px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas: "intro print" "controls print";
+  column-gap: clamp(40px, 6vw, 110px);
+  row-gap: clamp(24px, 2.2vw, 38px);
+}
+.nine-intro {
+  grid-area: intro;
+}
+.nine-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 clamp(16px, 1.6vw, 25px);
+  color: var(--shu-deep, #b4161f);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.nine-label::before {
+  content: "";
+  width: 26px;
+  height: 2px;
+  background: currentColor;
+}
+.nine-title {
+  margin: 0;
+  font: 600 clamp(40px, 4.3vw, 80px) / 1.09 var(--sans, Sora, Arial, sans-serif);
+  letter-spacing: -0.065em;
+}
+.nine-title span {
+  color: var(--shu, #e3232c);
+}
+.nine-description {
+  max-width: 45ch;
+  margin: clamp(16px, 1.6vw, 25px) 0 0;
+  font-size: clamp(1rem, 1.16vw, 1.25rem);
+  line-height: 1.6;
+  letter-spacing: -0.021em;
+  color: var(--on-light-mute, #57534b);
+}
+.nine-name svg {
+  vertical-align: -0.11em;
+  width: 2em;
+  height: 1em;
+  color: var(--sumi, #0c0c0e);
+}
+.nine-spoken {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.nine-print {
+  grid-area: print;
+  align-self: center;
+  justify-self: center;
+  display: block;
+  width: min(100%, 570px);
+  height: auto;
+  background-color: var(--paper, #efece4);
+  background-image: repeating-linear-gradient(173deg, transparent 0 5px, rgba(126, 105, 63, 0.035) 5.5px, transparent 6px 11px);
+}
+.nine-register {
+  stroke: var(--on-light-mute, #57534b);
+  stroke-width: 0.8;
+  opacity: 0.65;
+}
+.nine-chop {
+  color: var(--shu-deep, #b4161f);
+}
+.nine-chop-type {
+  color: var(--washi, #f8f7f4);
+}
+.nine-pigment {
+  flood-color: var(--shu, #e3232c);
+}
+.nine-ghost {
+  opacity: 0;
+  color: var(--sumi, #0c0c0e);
+}
+.nine--inspect .nine-ghost {
+  opacity: 0.09;
+}
+.nine--inspect .nine-ink {
+  opacity: 0.24;
+}
+.nine-controls {
+  grid-area: controls;
+  max-width: 640px;
+  width: 100%;
+}
+.nine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid var(--rule-light, #d8d4c8);
+}
+.nine-cut,
+.nine-replay {
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.nine-cut {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(8px, 1.1vw, 20px);
+  min-width: 0;
+  padding: clamp(13px, 1.2vw, 19px) clamp(4px, 0.7vw, 13px);
+  border-top: 1px solid var(--rule-light, #d8d4c8);
+  background: transparent;
+  text-align: start;
+}
+.nine-glyph svg {
+  display: block;
+  width: clamp(32px, 3.05vw, 51px);
+  height: auto;
+  aspect-ratio: 1;
+}
+.nine-caption {
+  display: grid;
+  gap: 3px;
+}
+.nine-reading {
+  font-size: clamp(0.92rem, 1.09vw, 1.16rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+.nine-direction {
+  color: var(--on-light-mute, #57534b);
+  font: 400 clamp(0.68rem, 0.83vw, 0.79rem) / 1.25 var(--mono, ui-monospace, SFMono-Regular, Consolas, monospace);
+  white-space: nowrap;
+}
+.nine-cut--active {
+  box-shadow: inset 0 2px var(--shu-deep, #b4161f);
+  color: var(--shu-deep, #b4161f);
+  background: var(--paper, #efece4);
+}
+.nine-cut--active .nine-direction {
+  color: inherit;
+}
+.nine-replay {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 46px;
+  margin-top: clamp(18px, 1.85vw, 30px);
+  padding: 10px 19px;
+  color: var(--on-dark, #f8f7f4);
+  background: var(--sumi, #0c0c0e);
+  font-size: 0.87rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.nine-replay:enabled:hover,
+.nine-replay:enabled:focus-visible,
+.nine--sequence .nine-replay {
+  background: var(--shu-deep, #b4161f);
+}
+.nine button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.nine button:focus-visible {
+  z-index: 1;
+  outline: 2px solid var(--shu-deep, #b4161f);
+  outline-offset: 2px;
+}
+@media (max-width: 1023px) {
+  .nine-layout {
+    max-width: 640px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "intro" "print" "controls";
+    row-gap: 26px;
+  }
+  .nine-print {
+    width: min(100%, 435px);
+  }
+}
+@media (max-width: 470px) {
+  .nine-print {
+    width: min(100%, 340px);
+  }
+  .nine-cut {
+    flex-direction: column;
+    gap: 6px;
+    padding: 11px 2px;
+    text-align: center;
+  }
+  .nine-caption {
+    gap: 2px;
+  }
+}
