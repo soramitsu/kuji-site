@@ -31,6 +31,8 @@
       href="assets/sora-semibold.woff2"
       crossorigin
     />
+    <link rel="preload" as="image" href="assets/photo/sky.webp" />
+    <link rel="preload" as="image" href="assets/photo/seimei.webp" />
     <script>
       // Hold the words until the opening scene has played, and let go if its script never arrives.
       if (
@@ -38,6 +40,7 @@
         (!location.hash || location.hash === "#top")
       ) {
         document.documentElement.classList.add("intro-pending");
+        window.kujiIntroBy = Date.now() + 4000;
         setTimeout(function () {
           if (!window.kujiHeroStarted) document.documentElement.classList.remove("intro-pending");
         }, 4000);
@@ -98,54 +101,27 @@
       <section class="hero" id="top" aria-labelledby="hero-title">
         <!-- HERO:START -->
 <div class="hero-stage" aria-hidden="true">
+  <div class="hs-world">
+    <img class="hs-l" id="hs-sky" data-depth=".3" style="--x:106;--y:-69;--w:1676;--h:1117" src="assets/photo/sky.webp" width="1536" height="1024" alt="" decoding="async" fetchpriority="high" />
+    <img class="hs-l hs-soft" id="hs-sky-soft" data-depth=".3" style="--x:106;--y:-69;--w:1676;--h:1117" src="assets/photo/sky-soft.webp" width="640" height="427" alt="" decoding="async" />
+    <div class="hs-l hs-mist hs-mist-far" data-depth=".16" style="--x:-2800;--y:520;--w:6804;--h:420;--n:3400;--tiles:6"><i></i></div>
+    <img class="hs-l hs-soft" id="hs-seimei-soft" style="--x:872;--y:92;--w:708;--h:1062" src="assets/photo/seimei-soft.webp" width="341" height="512" alt="" decoding="async" />
+    <img class="hs-l" id="hs-seimei" style="--x:872;--y:92;--w:708;--h:1062" src="assets/photo/seimei.webp" width="1024" height="1536" alt="" decoding="async" fetchpriority="high" />
+    <img class="hs-l hs-blink" style="--x:1163.08;--y:351.97;--w:72.6;--h:36.64" src="assets/photo/seimei-eyes.webp" width="105" height="53" alt="" decoding="async" />
+    <div class="hs-l hs-floor" style="--x:-4000;--y:650;--w:9600;--h:3600;--n:480"></div>
+  </div>
+  <div class="hs-veil" id="hs-veil"></div>
+
   <svg class="hero-svg" id="hero-svg" viewBox="-182 -86 1690 1056" preserveAspectRatio="xMaxYMax slice" focusable="false">
     <defs>
-      <linearGradient id="h-sky" gradientUnits="userSpaceOnUse" x1="0" y1="-700" x2="0" y2="1100">
-        <stop offset="0" stop-color="#060608"/>
-        <stop offset=".55" stop-color="#0C0C0E"/>
-        <stop offset="1" stop-color="#191622"/>
-      </linearGradient>
-      <radialGradient id="h-halo">
-        <stop offset=".58" stop-color="#E3232C" stop-opacity=".42"/>
-        <stop offset=".72" stop-color="#E3232C" stop-opacity=".16"/>
-        <stop offset="1" stop-color="#E3232C" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="h-moonfill" cx=".42" cy=".36" r=".75">
-        <stop offset="0" stop-color="#EE3A3A"/>
-        <stop offset=".7" stop-color="#E3232C"/>
-        <stop offset="1" stop-color="#C2161F"/>
-      </radialGradient>
-      <pattern id="h-hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(-11)">
-        <rect width="10" height="1" fill="#8E0E16" opacity=".26"/>
-      </pattern>
-      <linearGradient id="h-robe" gradientUnits="userSpaceOnUse" x1="-170" y1="0" x2="350" y2="120">
-        <stop offset="0" stop-color="#FFFFFF"/>
-        <stop offset=".45" stop-color="#F3F2F7"/>
-        <stop offset=".76" stop-color="#D6D4E4"/>
-        <stop offset="1" stop-color="#ABA9C5"/>
-      </linearGradient>
-      <linearGradient id="h-robe-arm" gradientUnits="userSpaceOnUse" x1="600" y1="0" x2="1230" y2="0">
-        <stop offset="0" stop-color="#FFFFFF"/>
-        <stop offset=".62" stop-color="#F4F3F8"/>
-        <stop offset="1" stop-color="#DCDAE8"/>
-      </linearGradient>
-      <linearGradient id="h-skin" gradientUnits="userSpaceOnUse" x1="-10" y1="0" x2="150" y2="0">
-        <stop offset="0" stop-color="#FFF1E4"/>
-        <stop offset=".5" stop-color="#F6E4D2"/>
-        <stop offset="1" stop-color="#EBD2BC"/>
-      </linearGradient>
-      <linearGradient id="h-fade" gradientUnits="userSpaceOnUse" x1="0" y1="650" x2="0" y2="930">
-        <stop offset="0" stop-color="#0C0C0E" stop-opacity="0"/>
-        <stop offset=".6" stop-color="#0C0C0E" stop-opacity=".86"/>
-        <stop offset="1" stop-color="#0C0C0E"/>
-      </linearGradient>
-      <radialGradient id="h-tipglow">
-        <stop offset="0" stop-color="#FFF3EC"/>
-        <stop offset=".22" stop-color="#FF8D7C" stop-opacity=".9"/>
-        <stop offset="1" stop-color="#E3232C" stop-opacity="0"/>
-      </radialGradient>
       <radialGradient id="h-latglow">
-        <stop offset="0" stop-color="#E3232C" stop-opacity=".46"/>
+        <stop offset="0" stop-color="#E3232C" stop-opacity=".5"/>
+        <stop offset=".5" stop-color="#E3232C" stop-opacity=".16"/>
+        <stop offset="1" stop-color="#E3232C" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="h-flashfill">
+        <stop offset="0" stop-color="#FFF4EC" stop-opacity=".85"/>
+        <stop offset=".3" stop-color="#FF8A78" stop-opacity=".4"/>
         <stop offset="1" stop-color="#E3232C" stop-opacity="0"/>
       </radialGradient>
       <clipPath id="h-reveal">
@@ -159,222 +135,58 @@
         <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
         <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
       </clipPath>
-      <path id="h-doll" d="M50 2C60 2 67 10 67 20C67 28 62 34 56 37L59 43L97 58L88 82L67 70L78 134L22 134L33 70L12 82L3 58L41 43L44 37C38 34 33 28 33 20C33 10 40 2 50 2Z"/>
     </defs>
 
-    <g id="h-cam">
-      <rect x="-5000" y="-4000" width="11600" height="9000" fill="url(#h-sky)"/>
+    <g id="h-kanji" fill="#E3232C">
+      <use class="h-kj" href="assets/seals.svg#seal-1" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="assets/seals.svg#seal-2" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="assets/seals.svg#seal-3" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="assets/seals.svg#seal-4" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="assets/seals.svg#seal-5" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="assets/seals.svg#seal-6" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="assets/seals.svg#seal-7" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="assets/seals.svg#seal-8" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="assets/seals.svg#seal-9" x="-150" y="-150" width="300" height="300"/>
+    </g>
 
-      <g id="h-stars" fill="#F8F7F4"><circle cx="1834" cy="-690" r="1.7" opacity="0.45"/><circle cx="2381" cy="-649" r="1.2" opacity="0.38"/><circle cx="3338" cy="25" r="1.5" opacity="0.47"/><circle cx="-443" cy="-348" r="1.6" opacity="0.39"/><circle cx="2423" cy="-738" r="2.4" opacity="0.88"/><circle cx="-999" cy="161" r="1.6" opacity="0.47"/><circle cx="1235" cy="-377" r="1.0" opacity="0.42"/><circle cx="-256" cy="23" r="1.4" opacity="0.35"/><circle cx="2754" cy="-460" r="2.1" opacity="0.89"/><circle cx="-1000" cy="-937" r="1.3" opacity="0.51"/><circle cx="1463" cy="-308" r="1.5" opacity="0.48" class="h-star-tw" style="animation-delay:-3.5s"/><circle cx="2489" cy="211" r="1.2" opacity="0.31"/><circle cx="-465" cy="-577" r="1.6" opacity="0.51"/><circle cx="974" cy="-940" r="1.6" opacity="0.36"/><circle cx="-1354" cy="261" r="1.5" opacity="0.40"/><circle cx="908" cy="234" r="1.3" opacity="0.51" class="h-star-tw" style="animation-delay:-0.4s"/><circle cx="1628" cy="-226" r="1.7" opacity="0.31"/><circle cx="-284" cy="-608" r="1.0" opacity="0.33"/><circle cx="557" cy="-252" r="1.6" opacity="0.39"/><circle cx="2016" cy="747" r="2.7" opacity="0.94"/><circle cx="175" cy="-404" r="1.5" opacity="0.53"/><circle cx="1948" cy="-27" r="1.2" opacity="0.52"/><circle cx="1441" cy="59" r="1.5" opacity="0.55"/><circle cx="-1881" cy="60" r="1.5" opacity="0.52"/><circle cx="437" cy="-547" r="1.1" opacity="0.33"/><circle cx="2764" cy="-627" r="1.1" opacity="0.42"/><circle cx="-83" cy="-1375" r="1.3" opacity="0.35"/><circle cx="-763" cy="-308" r="1.7" opacity="0.37" class="h-star-tw" style="animation-delay:-2.6s"/><circle cx="-1491" cy="624" r="1.4" opacity="0.50" class="h-star-tw" style="animation-delay:-3.0s"/><circle cx="233" cy="-13" r="0.9" opacity="0.48" class="h-star-tw" style="animation-delay:-2.9s"/><circle cx="2699" cy="236" r="1.0" opacity="0.51"/><circle cx="1435" cy="-1260" r="1.6" opacity="0.32"/><circle cx="2289" cy="-1070" r="0.9" opacity="0.35"/><circle cx="-993" cy="-809" r="1.1" opacity="0.33"/><circle cx="75" cy="233" r="1.6" opacity="0.48"/><circle cx="620" cy="138" r="1.1" opacity="0.31" class="h-star-tw" style="animation-delay:-2.3s"/><circle cx="-896" cy="-1360" r="0.9" opacity="0.38"/><circle cx="1020" cy="-1348" r="2.9" opacity="0.98"/><circle cx="-1670" cy="340" r="1.4" opacity="0.48"/><circle cx="181" cy="751" r="1.2" opacity="0.37"/><circle cx="2127" cy="793" r="1.6" opacity="0.42"/><circle cx="229" cy="-1175" r="2.6" opacity="0.83"/><circle cx="2552" cy="587" r="0.9" opacity="0.37"/><circle cx="-1514" cy="306" r="1.2" opacity="0.30"/><circle cx="1858" cy="-71" r="1.3" opacity="0.53"/><circle cx="2857" cy="-508" r="0.9" opacity="0.41" class="h-star-tw" style="animation-delay:-0.4s"/><circle cx="-1167" cy="-1187" r="2.4" opacity="0.83"/><circle cx="1238" cy="-1141" r="0.9" opacity="0.47"/><circle cx="1390" cy="-92" r="0.9" opacity="0.33"/><circle cx="3041" cy="-386" r="0.9" opacity="0.32"/><circle cx="1465" cy="-679" r="2.1" opacity="0.76" class="h-star-tw" style="animation-delay:-1.7s"/><circle cx="1478" cy="-1409" r="1.1" opacity="0.37" class="h-star-tw" style="animation-delay:-0.4s"/><circle cx="-1892" cy="-1121" r="1.2" opacity="0.38"/><circle cx="1830" cy="-646" r="1.6" opacity="0.52"/><circle cx="-1755" cy="333" r="1.3" opacity="0.32"/><circle cx="-1198" cy="415" r="1.1" opacity="0.53"/><circle cx="-786" cy="-1051" r="1.2" opacity="0.52"/><circle cx="1123" cy="-412" r="1.6" opacity="0.50"/><circle cx="-1816" cy="-625" r="1.0" opacity="0.39"/><circle cx="1758" cy="-923" r="1.0" opacity="0.39"/><circle cx="-1000" cy="654" r="1.3" opacity="0.45"/><circle cx="1513" cy="-1004" r="2.5" opacity="0.89"/><circle cx="2228" cy="230" r="1.3" opacity="0.52"/><circle cx="580" cy="-39" r="1.4" opacity="0.41"/><circle cx="959" cy="-461" r="2.2" opacity="0.83"/><circle cx="660" cy="444" r="0.9" opacity="0.54"/><circle cx="-281" cy="-1311" r="0.8" opacity="0.41"/><circle cx="2390" cy="582" r="0.9" opacity="0.39"/><circle cx="562" cy="-1156" r="1.0" opacity="0.32" class="h-star-tw" style="animation-delay:-3.3s"/><circle cx="713" cy="-893" r="1.0" opacity="0.31"/><circle cx="1690" cy="-221" r="2.5" opacity="0.99"/><circle cx="1662" cy="-1073" r="1.5" opacity="0.49" class="h-star-tw" style="animation-delay:-0.4s"/><circle cx="2392" cy="21" r="0.8" opacity="0.45" class="h-star-tw" style="animation-delay:-0.7s"/><circle cx="-853" cy="-969" r="2.7" opacity="0.91"/><circle cx="3165" cy="-905" r="2.3" opacity="0.79"/><circle cx="2394" cy="463" r="1.3" opacity="0.53"/><circle cx="774" cy="-1443" r="1.5" opacity="0.47"/><circle cx="3068" cy="-822" r="2.6" opacity="0.84" class="h-star-tw" style="animation-delay:-2.8s"/><circle cx="3290" cy="-84" r="1.1" opacity="0.38"/><circle cx="-1715" cy="-866" r="2.8" opacity="0.95"/><circle cx="2570" cy="-346" r="1.3" opacity="0.49"/><circle cx="1422" cy="-292" r="1.3" opacity="0.43"/><circle cx="3370" cy="718" r="0.9" opacity="0.42"/><circle cx="722" cy="-1056" r="1.1" opacity="0.32"/><circle cx="2928" cy="-1422" r="1.3" opacity="0.47"/><circle cx="3461" cy="-753" r="1.1" opacity="0.34"/><circle cx="1853" cy="-1018" r="1.3" opacity="0.46"/><circle cx="-510" cy="500" r="1.7" opacity="0.37"/><circle cx="2455" cy="-630" r="1.4" opacity="0.37"/><circle cx="-613" cy="-942" r="2.8" opacity="0.97"/><circle cx="-1052" cy="472" r="0.9" opacity="0.50"/><circle cx="809" cy="-739" r="0.9" opacity="0.35"/><circle cx="589" cy="475" r="1.3" opacity="0.41"/><circle cx="742" cy="543" r="1.5" opacity="0.50"/><circle cx="1581" cy="-436" r="2.9" opacity="0.79" class="h-star-tw" style="animation-delay:-2.8s"/><circle cx="-259" cy="-314" r="2.8" opacity="0.95"/><circle cx="-29" cy="-74" r="1.6" opacity="0.40"/><circle cx="-1197" cy="-967" r="2.6" opacity="0.80"/><circle cx="-299" cy="-714" r="2.4" opacity="0.89"/><circle cx="3293" cy="223" r="1.5" opacity="0.31"/><circle cx="488" cy="732" r="1.4" opacity="0.37"/><circle cx="1174" cy="-641" r="1.7" opacity="0.52"/><circle cx="2441" cy="-231" r="1.1" opacity="0.37"/><circle cx="3487" cy="-1480" r="1.7" opacity="0.54"/><circle cx="1519" cy="761" r="1.6" opacity="0.52"/><circle cx="2082" cy="336" r="0.9" opacity="0.37" class="h-star-tw" style="animation-delay:-3.3s"/><circle cx="3205" cy="-1378" r="1.7" opacity="0.52"/><circle cx="-1773" cy="-1464" r="2.8" opacity="0.89"/><circle cx="-1147" cy="-1189" r="1.3" opacity="0.46"/><circle cx="-318" cy="365" r="1.1" opacity="0.31"/><circle cx="3477" cy="77" r="1.1" opacity="0.48"/><circle cx="-363" cy="-439" r="1.0" opacity="0.35"/><circle cx="55" cy="-1118" r="2.2" opacity="0.96"/><circle cx="1544" cy="-503" r="1.3" opacity="0.51" class="h-star-tw" style="animation-delay:-0.0s"/><circle cx="-907" cy="616" r="2.3" opacity="0.87"/><circle cx="1233" cy="-457" r="1.1" opacity="0.37"/><circle cx="-832" cy="700" r="1.5" opacity="0.33"/><circle cx="1299" cy="-678" r="2.4" opacity="0.78"/><circle cx="3279" cy="533" r="1.6" opacity="0.47"/><circle cx="3206" cy="-10" r="1.3" opacity="0.41"/><circle cx="-739" cy="38" r="1.1" opacity="0.48"/><circle cx="2637" cy="-693" r="1.1" opacity="0.46"/><circle cx="-1299" cy="319" r="1.2" opacity="0.42"/><circle cx="112" cy="-49" r="1.0" opacity="0.48"/><circle cx="-1846" cy="-716" r="0.9" opacity="0.43"/><circle cx="-1046" cy="194" r="1.1" opacity="0.42"/><circle cx="-1892" cy="615" r="2.8" opacity="0.91"/><circle cx="739" cy="-975" r="1.2" opacity="0.40"/><circle cx="-657" cy="443" r="0.9" opacity="0.40"/><circle cx="-574" cy="604" r="2.6" opacity="0.79" class="h-star-tw" style="animation-delay:-0.1s"/><circle cx="-1063" cy="754" r="2.1" opacity="0.91"/><circle cx="2610" cy="-1195" r="1.4" opacity="0.35"/><circle cx="-1656" cy="-164" r="0.9" opacity="0.32"/><circle cx="747" cy="293" r="1.1" opacity="0.42"/><circle cx="2800" cy="-53" r="1.1" opacity="0.50"/><circle cx="-1800" cy="-604" r="1.1" opacity="0.35"/><circle cx="-70" cy="-445" r="2.6" opacity="0.82" class="h-star-tw" style="animation-delay:-2.4s"/><circle cx="-993" cy="270" r="1.5" opacity="0.54" class="h-star-tw" style="animation-delay:-1.7s"/><circle cx="-643" cy="-1049" r="1.3" opacity="0.38"/><circle cx="2268" cy="-987" r="1.0" opacity="0.43"/><circle cx="-1263" cy="-1162" r="1.1" opacity="0.50"/><circle cx="-940" cy="-1283" r="1.4" opacity="0.33" class="h-star-tw" style="animation-delay:-3.5s"/><circle cx="338" cy="-519" r="1.2" opacity="0.40"/><circle cx="-1447" cy="-650" r="1.4" opacity="0.36"/><circle cx="2838" cy="-724" r="1.6" opacity="0.35"/><circle cx="870" cy="-1175" r="1.1" opacity="0.41"/><circle cx="3418" cy="-750" r="1.2" opacity="0.53"/><circle cx="-158" cy="-1092" r="1.4" opacity="0.33"/><circle cx="117" cy="-274" r="1.5" opacity="0.48"/><circle cx="485" cy="691" r="2.7" opacity="0.86"/><circle cx="-515" cy="-990" r="2.4" opacity="0.80" class="h-star-tw" style="animation-delay:-0.2s"/><circle cx="-1626" cy="663" r="1.5" opacity="0.50"/><circle cx="1339" cy="-960" r="1.5" opacity="0.48"/><circle cx="2102" cy="-927" r="1.3" opacity="0.48"/><circle cx="-1704" cy="-1147" r="1.0" opacity="0.52"/><circle cx="-829" cy="-132" r="1.6" opacity="0.44"/><circle cx="-1344" cy="-73" r="1.2" opacity="0.31"/><circle cx="954" cy="-43" r="1.6" opacity="0.53"/><circle cx="-565" cy="666" r="2.3" opacity="0.96"/><circle cx="-825" cy="278" r="1.0" opacity="0.40" class="h-star-tw" style="animation-delay:-0.9s"/><circle cx="1023" cy="-1072" r="2.8" opacity="0.80"/><circle cx="1057" cy="-242" r="1.6" opacity="0.39"/><circle cx="1862" cy="-1203" r="2.4" opacity="0.97"/><circle cx="-1593" cy="-1065" r="1.6" opacity="0.39"/><circle cx="463" cy="-410" r="1.1" opacity="0.40"/><circle cx="523" cy="-691" r="1.0" opacity="0.41"/><circle cx="-706" cy="-396" r="0.8" opacity="0.40"/><circle cx="3476" cy="-297" r="1.6" opacity="0.51"/><circle cx="-114" cy="-524" r="1.5" opacity="0.45"/><circle cx="1371" cy="-600" r="1.3" opacity="0.45"/></g>
-
-      <g id="h-dipper">
-        <path d="M250 140L262 210L345 222L350 160ZM350 160L415 138L475 112L545 128" fill="none" stroke="#C8A561" stroke-width="1.2" stroke-opacity=".38"/>
-        <g fill="#F4E3BC">
-          <circle cx="250" cy="140" r="3.4"/><circle cx="262" cy="210" r="3"/><circle cx="345" cy="222" r="3"/><circle cx="350" cy="160" r="2.6"/>
-          <circle cx="415" cy="138" r="3.2"/><circle cx="475" cy="112" r="3.2"/><circle cx="545" cy="128" r="3.4"/>
-        </g>
+    <g id="h-lattice" transform="translate(745 470) scale(.82) translate(-179 -188)">
+      <circle id="h-latglow-c" cx="179" cy="188" r="330" fill="url(#h-latglow)"/>
+      <circle id="h-ring" cx="179" cy="188" r="10" fill="none" stroke="#FF6A5C" stroke-width="1.6" opacity="0"/>
+      <circle id="h-flash" cx="179" cy="188" r="420" fill="url(#h-flashfill)" opacity="0"/>
+      <g id="h-halos" fill="none" stroke-linecap="round"></g>
+      <g clip-path="url(#h-reveal)">
+        <image id="h-mark" href="assets/mark-reversed.svg" width="358" height="376"/>
       </g>
-
-      <g id="h-moon">
-        <circle cx="1245" cy="395" r="560" fill="url(#h-halo)"/>
-        <circle cx="1245" cy="395" r="335" fill="url(#h-moonfill)"/>
-        <circle cx="1245" cy="395" r="335" fill="url(#h-hatch)"/>
-      </g>
-
-      <g id="h-kasumi-back" fill="#14131B">
-        <rect x="830" y="596" width="470" height="20" rx="10"/>
-        <rect x="910" y="626" width="620" height="22" rx="11"/>
-        <rect x="1010" y="658" width="700" height="24" rx="12"/>
-        <rect x="1330" y="560" width="380" height="18" rx="9"/>
-        <rect x="1390" y="528" width="300" height="16" rx="8" opacity=".85"/>
-        <rect x="760" y="690" width="1000" height="60" rx="30"/>
-      </g>
-
-      <g id="h-seimei" transform="translate(1215 470)">
-        <!-- under-robe, seen at the open sides -->
-        <path fill="#C41A23" stroke="#1B1A24" stroke-width="2.2" stroke-linejoin="round" d="M-126 66C-136 108-139 200-140 300L-144 720H208L198 300C196 200 190 112 176 74Z"/>
-        <path fill="#8F0F17" opacity=".5" d="M150 70L176 74C190 112 196 200 198 300L208 720H170L162 300Z"/>
-        <!-- front panel -->
-        <path fill="url(#h-robe)" stroke="#1B1A24" stroke-width="2.2" stroke-linejoin="round" d="M-44 4C-82 10-110 30-122 62C-128 140-128 230-124 302L-130 720H166L160 302C164 230 164 140 158 64C142 32 104 10 52 2C40 20 20 31 4 31C-20 31-40 20-44 4Z"/>
-        <path fill="#BDBBD3" opacity=".6" d="M-50 10C-32 50 42 50 64 8C46 38-30 40-50 10Z"/>
-        <path fill="#C6C4DA" opacity=".5" d="M96 28C136 46 154 62 158 64C164 140 164 230 160 302L112 306C122 200 118 100 96 28Z"/>
-        <g fill="none" stroke="#77758F" stroke-width="1.5" stroke-linecap="round">
-          <path d="M-2 33C-6 120-9 220-11 300"/>
-          <path d="M-92 92C-88 170-92 240-100 298"/>
-          <path d="M72 52C92 140 100 230 100 300"/>
-          <path d="M-60 338C-66 460-72 600-74 720"/>
-          <path d="M40 338C46 470 50 600 50 720"/>
-          <path d="M112 334C122 470 128 600 130 720"/>
-        </g>
-        <g fill="none" stroke="#9B99B6" stroke-width="2" opacity=".55">
-          <circle cx="-62" cy="196" r="27"/><path transform="translate(-62 196)" d="M0-21L12.3 17L-20-6.500L20-6.500L-12.3 17Z"/>
-          <circle cx="56" cy="466" r="27"/><path transform="translate(56 466)" d="M0-21L12.3 17L-20-6.500L20-6.500L-12.3 17Z"/>
-        </g>
-        <path fill="#F7F6FA" stroke="#1B1A24" stroke-width="2.2" stroke-linejoin="round" d="M-126 298C-40 310 90 310 161 294L163 330C90 346-40 346-128 334Z"/>
-        <path fill="none" stroke="#77758F" stroke-width="1.5" stroke-linecap="round" d="M-100 312C-30 322 80 322 140 310"/>
-
-        <!-- near sleeve -->
-        <path fill="url(#h-robe)" stroke="#1B1A24" stroke-width="2.2" stroke-linejoin="round" d="M166 60C218 76 256 118 274 180C300 262 326 424 338 566L346 720H186L198 300C196 204 190 120 166 60Z"/>
-        <path fill="#A5A3C1" opacity=".55" d="M226 104C268 196 298 380 310 720H346L338 566C326 424 300 262 274 180C262 140 248 118 226 104Z"/>
-        <path fill="none" stroke="#77758F" stroke-width="1.5" stroke-linecap="round" d="M196 108C232 200 250 360 254 640"/>
-        <path fill="none" stroke="#FF7A6B" stroke-width="3.2" stroke-linecap="round" opacity=".9" d="M174 67C220 84 252 124 269 181C295 263 321 424 333 566L339 690"/>
-        <g transform="translate(246 332) skewY(10)" fill="none" stroke="#8C8AAB" stroke-width="2" opacity=".75"><circle r="29"/><path d="M0-23L13.500 18.600L-21.900-7.100L21.900-7.100L-13.500 18.600Z"/></g>
-
-        <!-- neck -->
-        <path fill="#DDBDA4" d="M-16-40L-18 4L21 4L22-46Z"/>
-        <path fill="#C9A68C" opacity=".7" d="M-16-40C-8-28 6-30 22-46L22-34C10-20-8-18-17-28Z"/>
-        <!-- inner collars -->
-        <path fill="#FBFAF8" stroke="#1B1A24" stroke-width="1.6" stroke-linejoin="round" d="M-31-21L0 7L31-23L22-30L0-9L-22-28Z"/>
-        <path fill="#E3232C" stroke="#1B1A24" stroke-width="1.6" stroke-linejoin="round" d="M-42-12L0 22L42-14L33-21L0 7L-33-19Z"/>
-        <!-- round collar -->
-        <path fill="#FFFFFF" stroke="#1B1A24" stroke-width="2.2" stroke-linejoin="round" d="M-52 0C-50 23-22 35 4 35C30 35 58 23 60 0L46-5C43 10 26 20 4 20C-18 20-35 10-38-5Z"/>
-        <circle cx="-43" cy="8" r="5" fill="#E3232C" stroke="#1B1A24" stroke-width="1.4"/>
-
-        <!-- head -->
-        <g id="h-head">
-          <path fill="#0C0C0E" d="M-50-124C-56-96-50-72-40-64L44-56C54-76 55-104 50-126Z"/>
-          <path fill="#F1DCC8" stroke="#5A382B" stroke-width="1.4" d="M36-99C47-102 52-90 48-79C45-72 39-71 36-76Z"/>
-          <path fill="#F8E9DA" stroke="#5A382B" stroke-width="1.6" stroke-linejoin="round" d="M-47-126C-51-112-52-98-50-88C-49-76-46-62-40-50C-35-40-29-32-21-29C-12-27-2-31 8-40C22-52 34-68 40-88L44-126Z"/>
-          <path fill="#DDBA9F" opacity=".7" d="M8-40C22-52 34-68 40-88L44-126L35-124C34-100 27-72 12-52C5-43-4-37-13-33C-5-31 2-35 8-40Z"/>
-          <path fill="#FFD3C4" opacity=".55" d="M-47-124C-51-112-52-98-50-88C-49-76-46-62-40-50C-41-64-44-80-44-92C-44-104-42-116-41-124Z"/>
-          <!-- sidelock -->
-          <path fill="#0C0C0E" d="M28-126C45-116 48-84 44-62C42-49 36-45 34-52C37-72 35-98 25-116Z"/>
-          <path fill="none" stroke="#0C0C0E" stroke-width="1.6" stroke-linecap="round" d="M40-58C40-48 37-40 33-36"/>
-          <!-- brows -->
-          <path fill="#1A1414" d="M-8-100C4-107 20-106 31-98C20-103 6-103-8-97.500Z"/>
-          <path fill="#1A1414" d="M-45-98C-38-104-29-104-21-99C-29-101-38-101-45-95.500Z"/>
-          <!-- eyes -->
-          <g id="h-eyes">
-            <path fill="#FFFDF9" d="M-5-86C2-93 16-94 25-88C17-84 4-83-5-86Z"/>
-            <circle cx="5" cy="-88.600" r="4.200" fill="#2A1A14"/>
-            <circle cx="3.800" cy="-90" r="1.100" fill="#FFFFFF"/>
-            <path fill="none" stroke="#1A1414" stroke-width="2.600" stroke-linecap="round" d="M-6-86C2-94 16-95 26-89"/>
-            <path fill="none" stroke="#E3232C" stroke-width="2.200" stroke-linecap="round" d="M24-89.500L31-93"/>
-            <path fill="none" stroke="#5A382B" stroke-width="1" stroke-linecap="round" opacity=".55" d="M0-84.300C8-82.800 16-83.600 22-86"/>
-            <path fill="#FFFDF9" d="M-43-86C-38-92-29-92-23-87C-29-84-38-84-43-86Z"/>
-            <circle cx="-35.500" cy="-87.800" r="3.600" fill="#2A1A14"/>
-            <circle cx="-36.500" cy="-89" r="1" fill="#FFFFFF"/>
-            <path fill="none" stroke="#1A1414" stroke-width="2.600" stroke-linecap="round" d="M-44-86C-38-93-29-93-22-88"/>
-          </g>
-          <!-- nose, mouth -->
-          <path fill="none" stroke="#8C5F4A" stroke-width="1.700" stroke-linecap="round" stroke-linejoin="round" d="M-18-88C-21-78-28-70-30-63C-30-60-26-58-21-59"/>
-          <path fill="none" stroke="#A2443B" stroke-width="2" stroke-linecap="round" d="M-30-48C-25-46-18-46-12-49"/>
-          <path fill="none" stroke="#C97C6E" stroke-width="1.400" stroke-linecap="round" d="M-26-44C-22-42.500-18-42.500-15-44"/>
-          <!-- eboshi -->
-          <path fill="#0C0C0E" stroke="#22212B" stroke-width="1.5" d="M-54-124C-60-170-52-236-32-280C-22-302 10-316 34-306C56-297 62-272 58-240C54-196 52-156 50-118C22-110-24-112-54-124Z"/>
-          <path fill="none" stroke="#32313C" stroke-width="3" stroke-linecap="round" d="M-36-146C-34-200-22-256 6-294"/>
-          <path fill="none" stroke="#32313C" stroke-width="2.400" stroke-linecap="round" d="M12-140C16-190 24-240 40-284"/>
-          <path fill="none" stroke="#2A2933" stroke-width="2" stroke-linecap="round" d="M-14-143C-10-196 0-250 22-290"/>
-          <path fill="none" stroke="#FF7A6B" stroke-opacity=".7" stroke-width="2.400" stroke-linecap="round" d="M54-132C56-176 60-214 59-246C58-272 52-292 37-302"/>
-          <path fill="#1D1C24" stroke="#3A3944" stroke-width="1.2" d="M-54-124C-24-112 22-110 50-118L50-130C22-122-24-124-55-136Z"/>
-          <!-- cords -->
-          <g fill="none" stroke="#C8A561" stroke-width="2" stroke-linecap="round">
-            <path d="M33-122C36-92 28-58 4-35"/>
-            <path d="M-12-32C-16-20-18-6-16 8M-6-32C-2-20 0-8-2 6"/>
-          </g>
-          <circle cx="-9" cy="-33" r="4" fill="#C8A561" stroke="#6E5524" stroke-width="1"/>
-        </g>
-      </g>
-
-      <g id="h-kanji" fill="#E3232C">
-        <use class="h-kj" href="assets/seals.svg#seal-1" x="-150" y="-150" width="300" height="300"/>
-        <use class="h-kj" href="assets/seals.svg#seal-2" x="-150" y="-150" width="300" height="300"/>
-        <use class="h-kj" href="assets/seals.svg#seal-3" x="-150" y="-150" width="300" height="300"/>
-        <use class="h-kj" href="assets/seals.svg#seal-4" x="-150" y="-150" width="300" height="300"/>
-        <use class="h-kj" href="assets/seals.svg#seal-5" x="-150" y="-150" width="300" height="300"/>
-        <use class="h-kj" href="assets/seals.svg#seal-6" x="-150" y="-150" width="300" height="300"/>
-        <use class="h-kj" href="assets/seals.svg#seal-7" x="-150" y="-150" width="300" height="300"/>
-        <use class="h-kj" href="assets/seals.svg#seal-8" x="-150" y="-150" width="300" height="300"/>
-        <use class="h-kj" href="assets/seals.svg#seal-9" x="-150" y="-150" width="300" height="300"/>
-      </g>
-
-      <g id="h-lattice" transform="translate(745 470) scale(.82) translate(-179 -188)">
-        <circle id="h-latglow-c" cx="179" cy="188" r="330" fill="url(#h-latglow)"/>
-        <circle id="h-ring" cx="179" cy="188" r="10" fill="none" stroke="#FF6A5C" stroke-width="3" opacity="0"/>
-        <g clip-path="url(#h-reveal)">
-          <image href="assets/mark-reversed.svg" width="358" height="376"/>
-        </g>
-        <g id="h-trails" fill="none" stroke-linecap="round">
-          <path class="h-trail" d="M12 57L341 50"/>
-          <path class="h-trail" d="M68 12L69 368"/>
-          <path class="h-trail" d="M11 124L341 121"/>
-          <path class="h-trail" d="M137 11L140 366"/>
-          <path class="h-trail" d="M12 192L342 188"/>
-          <path class="h-trail" d="M211 9L213 365"/>
-          <path class="h-trail" d="M13 258L342 253"/>
-          <path class="h-trail" d="M284.500 7L289.500 364"/>
-          <path class="h-trail" d="M13 322L342 318"/>
-        </g>
-      </g>
-
-      <g id="h-arm">
-        <path id="h-lining" fill="#C41A23" stroke="#1B1A24" stroke-width="2" stroke-linejoin="round" d="M1126.59 514.08Q1107.06 616.22 1118.59 726.08Q1151.71 627.31 1126.59 514.08Z"/>
-        <g id="h-hand" transform="translate(1147.76 409.62) rotate(82) scale(0.75)">
-          <circle id="h-tip" cx="-6" cy="-5" r="52" fill="url(#h-tipglow)" opacity="0"/>
-          <g stroke="#3A241B" stroke-width="2.200" stroke-linejoin="round" stroke-linecap="round">
-            <!-- middle finger, behind -->
-            <path fill="#EBD2BC" d="M70-20C48-23.500 24-25 0-24C-9-23.700-14.500-20-14.500-15.600C-14.500-11.600-10-8.600-3-8.600L70-6Z"/>
-            <path fill="#F4C9BC" stroke-width="1.200" d="M-11.500-21C-6-24.500 2-25 7-24.200C3-22.300-4-21-9.500-19Z"/>
-            <path fill="none" stroke-width="1.300" d="M21-24C22.300-21.500 22.300-19 21.300-16.500M44-22.500C45.300-20 45.300-17.500 44.300-15"/>
-            <!-- index finger -->
-            <path fill="url(#h-skin)" d="M72-5C50-7.500 28-8.800 8-8.300C0-8.100-5.500-4.600-5.500 0C-5.500 4.600 0 7.700 8 7.900C28 8.700 50 9.800 72 12.500Z"/>
-            <path fill="#F4C9BC" stroke-width="1.200" d="M-2.500-6C3-9 11-9.400 15.500-8.500C12-6.800 5-5.600-0.500-3.800Z"/>
-            <path fill="none" stroke-width="1.300" d="M27-8C28.300-5.500 28.300-3 27.300-0.500M48-7C49.300-4.500 49.300-2 48.300 0.500"/>
-            <!-- curled little and ring fingers -->
-            <path fill="#E3C4AB" d="M74 27C68 30 67 40 75 44C84 47 95 43 97 35L92 25Z"/>
-            <path fill="#EFD9C4" d="M66 10C58 12 54 23 61 31C68 38 82 38 90 31L92 15Z"/>
-            <!-- back of the hand and wrist -->
-            <path fill="url(#h-skin)" d="M66-24C80-28.500 100-28.500 118-25L160-21L160 27L124 29C112 35 96 37 87 33C74 28 63 20 63 9Z"/>
-            <path fill="none" stroke-width="1.300" d="M67-18C69-11 69-2 66 6"/>
-            <path fill="#E3C4AB" stroke="none" opacity=".6" d="M98 30C110 30 122 27 134 28L160 27L160 14C140 16 116 20 98 30Z"/>
-            <!-- thumb -->
-            <path fill="url(#h-skin)" d="M121 3C108 0 96 6 86 12C78 16 71 19 68 24C65 29 68 34 74 34.500C82 35 90 31 98 27C108 22 118 22 126 15"/>
-            <path fill="#F4C9BC" stroke-width="1.200" d="M69.500 24C73 20 79 18.500 83.500 20.500C80 23.500 75 26 70.500 27.500Z"/>
-            <!-- inner cuff -->
-            <path fill="#FFFFFF" d="M134-29L166-26L166 33L136 31Z"/>
-            <path fill="#E3232C" stroke-width="1.400" d="M134-29L141-28.400L143 31.400L136 31Z"/>
-          </g>
-          <circle id="h-tipbloom" cx="-6" cy="-5" r="30" fill="url(#h-tipglow)" opacity="0"/>
-          <circle id="h-tipcore" cx="-8" cy="-5" r="5" fill="#FFF6EF" opacity="0"/>
-        </g>
-        <path id="h-sleeve" fill="url(#h-robe-arm)" stroke="#1B1A24" stroke-width="2.2" stroke-linejoin="round" d="M1185.02 505.87Q1230.15 562.53 1231.29 647.19Q1236.29 710.19 1217.29 773.19Q1167.94 769.63 1118.59 726.08Q1115.8 618.39 1126.59 514.08Z"/>
-        <path id="h-pleat" fill="#B9B7D0" opacity=".55" d="M1181.04 516.24Q1140.2 631.23 1148.2 746.21L1179.79 763.29Q1175.79 639.76 1181.04 516.24Z"/>
-        <path id="h-folds" fill="none" stroke="#77758F" stroke-width="1.5" stroke-linecap="round" d="M1219.72 627.86Q1200.29 710.19 1199.52 766.71"/>
-        <path id="h-lace" fill="none" stroke="#C41A23" stroke-width="2.600" stroke-linecap="round" stroke-dasharray="11 9" d="M1137.27 526.73Q1126.47 621.04 1129.27 716.73"/>
-        <path id="h-cords" fill="none" stroke="#C8A561" stroke-width="2.2" stroke-linecap="round" d="M1122.47 723.08q-3 20 -1 40M1131.21 723.08q-1 17 3 33"/>
-      </g>
-
-      <path id="h-sparks" fill="none" stroke="#FFD9CF" stroke-width="3" stroke-linecap="round" d=""/>
-
-      <rect x="-5000" y="650" width="11600" height="282" fill="url(#h-fade)"/>
-      <rect x="-5000" y="930" width="11600" height="4000" fill="#0C0C0E"/>
-
-      <g id="h-kasumi-front">
-        <g fill="#191822">
-          <rect x="420" y="868" width="760" height="24" rx="12"/>
-          <rect x="300" y="900" width="1100" height="28" rx="14"/>
-          <rect x="980" y="842" width="520" height="20" rx="10"/>
-          <rect x="1120" y="934" width="820" height="30" rx="15"/>
-          <rect x="-200" y="940" width="900" height="30" rx="15"/>
-          <rect x="1500" y="880" width="700" height="24" rx="12"/>
-          <rect x="-600" y="884" width="760" height="24" rx="12"/>
-        </g>
-        <g fill="#F8F7F4" opacity=".07">
-          <rect x="420" y="868" width="760" height="2" rx="1"/>
-          <rect x="300" y="900" width="1100" height="2" rx="1"/>
-          <rect x="980" y="842" width="520" height="2" rx="1"/>
-          <rect x="1120" y="934" width="820" height="2" rx="1"/>
-        </g>
-      </g>
-
-      <g id="h-shiki">
-        <g class="h-doll" data-x="668" data-y="238" data-r="-14" data-s=".56" transform="translate(668 238) rotate(-14) scale(.56) translate(-50 -70)"><g class="h-bob"><use href="#h-doll" fill="#F8F7F4"/><path d="M50 38V132M41 43L50 52L59 43" fill="none" stroke="#C3C1CF" stroke-width="2"/></g></g>
-        <g class="h-doll" data-x="946" data-y="176" data-r="12" data-s=".46" transform="translate(946 176) rotate(12) scale(.46) translate(-50 -70)"><g class="h-bob"><use href="#h-doll" fill="#F8F7F4"/><path d="M50 38V132M41 43L50 52L59 43" fill="none" stroke="#C3C1CF" stroke-width="2"/></g></g>
-        <g class="h-doll" data-x="512" data-y="704" data-r="18" data-s=".74" transform="translate(512 704) rotate(18) scale(.74) translate(-50 -70)"><g class="h-bob"><use href="#h-doll" fill="#F8F7F4"/><path d="M50 38V132M41 43L50 52L59 43" fill="none" stroke="#C3C1CF" stroke-width="2"/></g></g>
-        <g class="h-doll" data-x="972" data-y="716" data-r="-10" data-s=".4" data-ny="664" transform="translate(972 716) rotate(-10) scale(.4) translate(-50 -70)"><g class="h-bob"><use href="#h-doll" fill="#F8F7F4"/><path d="M50 38V132M41 43L50 52L59 43" fill="none" stroke="#C3C1CF" stroke-width="2"/></g></g>
+      <g id="h-cores" fill="none" stroke-linecap="round">
+        <path class="h-core" d="M12 57L341 50"/>
+        <path class="h-core" d="M68 12L69 368"/>
+        <path class="h-core" d="M11 124L341 121"/>
+        <path class="h-core" d="M137 11L140 366"/>
+        <path class="h-core" d="M12 192L342 188"/>
+        <path class="h-core" d="M211 9L213 365"/>
+        <path class="h-core" d="M13 258L342 253"/>
+        <path class="h-core" d="M284.500 7L289.500 364"/>
+        <path class="h-core" d="M13 322L342 318"/>
       </g>
     </g>
+
+    <path id="h-sparks-glow" fill="none" stroke-linecap="round" d=""/>
+    <path id="h-sparks" fill="none" stroke-linecap="round" d=""/>
   </svg>
+
+  <img class="hs-hand" id="hs-hand" data-tip-x="200" data-tip-y="392" data-angle="26.1" data-unit="0.215" src="assets/photo/hand.webp" width="1836" height="2600" alt="" decoding="async" />
+  <img class="hs-hand hs-hand-lit" id="hs-hand-lit" src="assets/photo/hand-tip.webp" width="1010" height="1200" alt="" decoding="async" />
+
+  <div class="hs-world hs-world-front">
+    <div class="hs-l hs-mist hs-mist-near" data-depth="-.22" style="--x:-2600;--y:690;--w:6804;--h:360;--n:3400;--tiles:7"><i></i></div>
+    <div class="hs-l hs-motes" data-depth="-.12" style="--x:380;--y:60;--w:1240;--h:860;--n:1240"><i style="--mx:17.5%;--my:71.8%;--ms:0.83%;--mo:0.61;--md:11.2s;--mw:-15.1s;--mdx:2%"></i><i style="--mx:19.3%;--my:59.1%;--ms:0.94%;--mo:0.36;--md:18.3s;--mw:-8.1s;--mdx:-2%"></i><i style="--mx:76.6%;--my:36.1%;--ms:0.52%;--mo:0.37;--md:19.0s;--mw:-14.0s;--mdx:1%"></i><i style="--mx:59.9%;--my:20.7%;--ms:0.60%;--mo:0.62;--md:10.2s;--mw:-18.1s;--mdx:-1%"></i><i style="--mx:4.2%;--my:75.8%;--ms:0.42%;--mo:0.79;--md:9.2s;--mw:-3.1s;--mdx:3%"></i><i style="--mx:34.2%;--my:55.8%;--ms:0.49%;--mo:0.37;--md:17.7s;--mw:-4.5s;--mdx:-2%"></i><i style="--mx:21.6%;--my:93.6%;--ms:1.02%;--mo:0.77;--md:16.6s;--mw:-11.0s;--mdx:3%"></i><i style="--mx:8.7%;--my:61.7%;--ms:0.77%;--mo:0.56;--md:12.4s;--mw:-2.8s;--mdx:2%"></i><i style="--mx:40.5%;--my:46.5%;--ms:0.69%;--mo:0.56;--md:18.9s;--mw:-7.3s;--mdx:-3%"></i><i style="--mx:80.4%;--my:30.4%;--ms:0.89%;--mo:0.89;--md:9.0s;--mw:-1.3s;--mdx:2%"></i><i style="--mx:72.3%;--my:35.3%;--ms:0.81%;--mo:0.66;--md:15.2s;--mw:-3.4s;--mdx:-2%"></i><i style="--mx:60.9%;--my:83.0%;--ms:0.60%;--mo:0.77;--md:18.3s;--mw:-4.7s;--mdx:-2%"></i><i style="--mx:8.2%;--my:81.5%;--ms:0.93%;--mo:0.56;--md:15.8s;--mw:-12.8s;--mdx:3%"></i><i style="--mx:92.1%;--my:49.7%;--ms:1.09%;--mo:0.88;--md:14.9s;--mw:-16.8s;--mdx:1%"></i><i style="--mx:49.6%;--my:70.0%;--ms:1.05%;--mo:0.49;--md:14.6s;--mw:-8.3s;--mdx:1%"></i><i style="--mx:74.7%;--my:55.7%;--ms:0.98%;--mo:0.38;--md:11.6s;--mw:-5.5s;--mdx:1%"></i></div>
+    <span class="hs-doll" data-depth=".1" style="--x:668;--y:238;--r:-14;--s:.56"><img src="assets/photo/doll-2.webp" width="700" height="980" alt="" decoding="async" /></span>
+    <span class="hs-doll hs-doll-far" data-depth=".22" style="--x:946;--y:176;--r:12;--s:.46"><img src="assets/photo/doll-1.webp" width="700" height="980" alt="" decoding="async" /></span>
+    <span class="hs-doll hs-doll-near" data-depth="-.2" style="--x:512;--y:704;--r:18;--s:.74"><img src="assets/photo/doll-3.webp" width="700" height="980" alt="" decoding="async" /></span>
+    <span class="hs-doll hs-doll-far" data-depth=".16" style="--x:700;--y:836;--r:-10;--s:.4;--ny:730"><img src="assets/photo/doll-2.webp" width="700" height="980" alt="" decoding="async" /></span>
+  </div>
+  <div class="hs-grain"></div>
+  <div class="hs-vignette"></div>
 </div>
 <div class="hero-scrim" aria-hidden="true"></div>
 
@@ -449,6 +261,10 @@
           <use href="assets/seals.svg#seal-ji" x="3" y="21" width="21" height="21" />
         </g>
       </g>
+      <pattern id="nine-fibre-tile" patternUnits="userSpaceOnUse" width="560" height="560">
+        <image href="assets/photo/ink-fibre.webp" width="560" height="560" />
+      </pattern>
+      <rect class="nine-fibre" width="500" height="500" fill="url(#nine-fibre-tile)" />
     </svg>
 
     <div class="nine-controls">
@@ -528,9 +344,8 @@
           <ol class="evidence" role="list">
             <li class="evi" data-reveal="card" style="--i: 0">
               <span class="evi-doll" aria-hidden="true"
-                ><svg class="doll" viewBox="0 0 100 140" focusable="false">
-                  <use href="#shiki" /></svg
-                ><span class="doll-num" lang="ja">一</span></span
+                ><img class="pdoll" src="assets/photo/doll-1-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+                /><span class="doll-num" lang="ja">一</span></span
               >
               <div class="vis" aria-hidden="true">
                 <svg class="v v-file" viewBox="0 0 260 170" focusable="false">
@@ -597,9 +412,8 @@
 
             <li class="evi" data-reveal="card" style="--i: 1">
               <span class="evi-doll" aria-hidden="true"
-                ><svg class="doll" viewBox="0 0 100 140" focusable="false">
-                  <use href="#shiki" /></svg
-                ><span class="doll-num" lang="ja">二</span></span
+                ><img class="pdoll" src="assets/photo/doll-2-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+                /><span class="doll-num" lang="ja">二</span></span
               >
               <div class="vis" aria-hidden="true">
                 <svg class="v v-run" viewBox="0 0 260 170" focusable="false">
@@ -696,9 +510,8 @@
 
             <li class="evi" data-reveal="card" style="--i: 2">
               <span class="evi-doll" aria-hidden="true"
-                ><svg class="doll" viewBox="0 0 100 140" focusable="false">
-                  <use href="#shiki" /></svg
-                ><span class="doll-num" lang="ja">三</span></span
+                ><img class="pdoll" src="assets/photo/doll-3-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+                /><span class="doll-num" lang="ja">三</span></span
               >
               <div class="vis" aria-hidden="true">
                 <svg class="v v-host" viewBox="0 0 260 170" focusable="false">
@@ -941,11 +754,10 @@
             <span class="sheet sheet-a" aria-hidden="true"></span>
             <span class="sheet sheet-b" aria-hidden="true"></span>
             <span class="peek" aria-hidden="true"
-              ><svg class="doll" viewBox="0 0 100 140" focusable="false">
-                <use href="#shiki" /></svg
-            ></span>
+              ><img class="pdoll" src="assets/photo/doll-3-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+            /></span>
             <figure class="app-view">
-              <span class="tape" aria-hidden="true"></span>
+              <img class="tape" src="assets/photo/tape-400.webp" alt="" width="400" height="120" loading="lazy" decoding="async" />
               <img
                 src="assets/kuji-app.webp"
                 alt="The KUJI app’s Status screen with Quick scan and Full scan controls."
@@ -1113,17 +925,14 @@
           <span class="mist mist-2"></span>
           <span class="mist mist-3"></span>
           <span class="flyer flyer-1"
-            ><svg class="doll" viewBox="0 0 100 140" focusable="false">
-              <use href="#shiki" /></svg
-          ></span>
+            ><img class="pdoll" src="assets/photo/doll-2-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+          /></span>
           <span class="flyer flyer-2"
-            ><svg class="doll" viewBox="0 0 100 140" focusable="false">
-              <use href="#shiki" /></svg
-          ></span>
+            ><img class="pdoll" src="assets/photo/doll-1-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+          /></span>
           <span class="flyer flyer-3"
-            ><svg class="doll" viewBox="0 0 100 140" focusable="false">
-              <use href="#shiki" /></svg
-          ></span>
+            ><img class="pdoll" src="assets/photo/doll-3-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+          /></span>
         </div>
         <div class="wrap contact-inner">
           <div class="contact-copy" data-reveal>
@@ -1142,10 +951,7 @@
             ></a>
           </div>
           <div class="cta-mascot" aria-hidden="true">
-            <svg viewBox="1060 146 500 704" preserveAspectRatio="xMidYMax meet" focusable="false">
-              <use href="#h-seimei" />
-              <use href="#h-arm" />
-            </svg>
+            <img src="assets/photo/seimei.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async" />
           </div>
         </div>
       </section>

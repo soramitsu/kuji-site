@@ -1,7 +1,11 @@
 .nine {
   padding: clamp(58px, 6.5vw, 112px) var(--pad, clamp(22px, 6.3vw, 110px));
   color: var(--on-light, #0c0c0e);
-  background: var(--washi, #f8f7f4);
+  /* Photographed washi, anchored to the lower edge so the torn edge below continues it */
+  background-color: var(--washi-tone, #f3f1ea);
+  background-image: var(--washi-tile, none);
+  background-position: 0 100%;
+  background-size: var(--tile, 640px);
   font-family: var(--sans, Sora, Arial, sans-serif);
 }
 .nine *,
@@ -77,8 +81,27 @@
   display: block;
   width: min(100%, 570px);
   height: auto;
+  /* A heavier, warmer sheet of the same washi laid on the band, lit from the upper left.
+     The paper is sized to the print (112%) so .nine-fibre lines up with it at any width. */
   background-color: var(--paper, #efece4);
-  background-image: repeating-linear-gradient(173deg, transparent 0 5px, rgba(126, 105, 63, 0.035) 5.5px, transparent 6px 11px);
+  background-image: var(--falloff, none),
+    linear-gradient(rgba(170, 148, 104, 0.1), rgba(170, 148, 104, 0.1)),
+    var(--washi-tile, none);
+  background-position: 0 0;
+  background-size: auto, auto, 112%;
+  box-shadow: var(--edge, none), var(--rest-light, none);
+}
+/* Ink and seal are pressed into the paper: they multiply with its fibre, and a map of
+   that fibre is screened back over the black so it is not a flat, pasted-on fill. */
+.nine-register,
+.nine-ink,
+.nine-chop {
+  mix-blend-mode: multiply;
+}
+.nine-fibre {
+  mix-blend-mode: screen;
+  opacity: 0.8;
+  pointer-events: none;
 }
 .nine-register {
   stroke: var(--on-light-mute, #57534b);
@@ -158,7 +181,7 @@
 .nine-cut--active {
   box-shadow: inset 0 2px var(--shu-deep, #b4161f);
   color: var(--shu-deep, #b4161f);
-  background: var(--paper, #efece4);
+  background: rgba(150, 126, 80, 0.09);
 }
 .nine-cut--active .nine-direction {
   color: inherit;
