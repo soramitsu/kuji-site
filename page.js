@@ -54,6 +54,20 @@
   });
   schedule();
 
+  /* ---------- Header: the language menu closes when the reader looks elsewhere ---------- */
+  const languages = mast.querySelector(".lang");
+  if (languages) {
+    document.addEventListener("click", (event) => {
+      if (languages.open && !languages.contains(event.target)) languages.open = false;
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && languages.open) {
+        languages.open = false;
+        languages.querySelector("summary").focus();
+      }
+    });
+  }
+
   /* ---------- Header: mark the section being read ---------- */
   const navTargets = new Map();
   for (const link of mast.querySelectorAll('nav a[href^="#"]')) {
@@ -136,6 +150,9 @@
     const counter = stage.querySelector(".count-num");
     const slips = [...stage.querySelectorAll(".slip")];
     const replayLabel = replay.querySelector(".replay-label");
+    /* The words come from the markup, so that every language's page carries its own. */
+    const doneText = status.textContent;
+    const replayText = replayLabel.textContent;
 
     /* One mark per simulated event; they carry no labels. */
     let seed = 20261121;
@@ -180,8 +197,8 @@
       command.style.setProperty("--k", typedLength);
       marks.style.setProperty("--read", TOTAL + 40);
       counter.textContent = String(TOTAL);
-      status.textContent = "294 events · 2 findings";
-      replayLabel.textContent = "Replay";
+      status.textContent = doneText;
+      replayLabel.textContent = replayText;
       replay.disabled = false;
     }
 
@@ -204,8 +221,8 @@
       arm();
       playing = true;
       stage.classList.add("is-playing", "is-typing");
-      status.textContent = "Reading simulated events…";
-      replayLabel.textContent = "Playing";
+      status.textContent = status.dataset.tPlaying;
+      replayLabel.textContent = replayLabel.dataset.tPlaying;
       replay.disabled = true;
 
       let time = 380;
@@ -296,17 +313,16 @@
     copy.addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(commandText.textContent);
-        copy.textContent = "Copied";
-        copyStatus.textContent = "Demo command copied.";
+        copy.textContent = copy.dataset.tCopied;
+        copyStatus.textContent = copyStatus.dataset.tCopied;
       } catch {
         const range = document.createRange();
         range.selectNodeContents(commandText);
         const selection = window.getSelection();
         selection.removeAllRanges();
         selection.addRange(range);
-        copyStatus.textContent =
-          "Command selected. Use your device’s copy command.";
-        copy.textContent = "Selected";
+        copyStatus.textContent = copyStatus.dataset.tSelected;
+        copy.textContent = copy.dataset.tSelected;
       }
     });
   }

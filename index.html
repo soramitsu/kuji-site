@@ -22,7 +22,25 @@
       property="og:image:alt"
       content="Abe no Seimei raises two fingers before a vermilion moon beside KUJI’s nine-stroke lattice."
     />
+    <meta property="og:url" content="https://kuji.soramitsu.co.jp/" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://kuji.soramitsu.co.jp/" />
+    <!-- ALTERNATES:START -->
+    <link rel="alternate" hreflang="en" href="https://kuji.soramitsu.co.jp/" />
+    <link rel="alternate" hreflang="ja" href="https://kuji.soramitsu.co.jp/ja/" />
+    <link rel="alternate" hreflang="he" href="https://kuji.soramitsu.co.jp/he/" />
+    <link rel="alternate" hreflang="ar" href="https://kuji.soramitsu.co.jp/ar/" />
+    <link rel="alternate" hreflang="ru" href="https://kuji.soramitsu.co.jp/ru/" />
+    <link rel="alternate" hreflang="fr" href="https://kuji.soramitsu.co.jp/fr/" />
+    <link rel="alternate" hreflang="es" href="https://kuji.soramitsu.co.jp/es/" />
+    <link rel="alternate" hreflang="pt" href="https://kuji.soramitsu.co.jp/pt/" />
+    <link rel="alternate" hreflang="ur" href="https://kuji.soramitsu.co.jp/ur/" />
+    <link rel="alternate" hreflang="bn" href="https://kuji.soramitsu.co.jp/bn/" />
+    <link rel="alternate" hreflang="my" href="https://kuji.soramitsu.co.jp/my/" />
+    <link rel="alternate" hreflang="km" href="https://kuji.soramitsu.co.jp/km/" />
+    <link rel="alternate" hreflang="x-default" href="https://kuji.soramitsu.co.jp/" />
+    <!-- ALTERNATES:END -->
     <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
     <link
       rel="preload"
@@ -49,6 +67,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="hero.css" />
     <link rel="stylesheet" href="nine.css" />
+    <link rel="stylesheet" href="lang.css" />
     <script src="hero.js" defer></script>
     <script src="nine.js" defer></script>
     <script src="page.js" defer></script>
@@ -94,6 +113,29 @@
           >Contact</a
         >
       </nav>
+      <details class="lang">
+        <summary
+          ><svg class="lang-globe" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.200 3.300 3.200 14.700 0 18M12 3c-3.200 3.300-3.200 14.700 0 18"/></svg
+          ><span class="sr-only">Language: </span
+          ><!-- CURRENT:START --><span class="lang-current" lang="en" translate="no">English</span><!-- CURRENT:END --></summary
+        >
+        <!-- LANGS:START -->
+        <ul class="lang-list" translate="no">
+          <li><a href="./" hreflang="en" lang="en" aria-current="page">English</a></li>
+          <li><a href="ja/" hreflang="ja" lang="ja">日本語</a></li>
+          <li><a href="he/" hreflang="he" lang="he" dir="rtl">עברית</a></li>
+          <li><a href="ar/" hreflang="ar" lang="ar" dir="rtl">العربية</a></li>
+          <li><a href="ru/" hreflang="ru" lang="ru">Русский</a></li>
+          <li><a href="fr/" hreflang="fr" lang="fr">Français</a></li>
+          <li><a href="es/" hreflang="es" lang="es">Español</a></li>
+          <li><a href="pt/" hreflang="pt" lang="pt-BR">Português</a></li>
+          <li><a href="ur/" hreflang="ur" lang="ur" dir="rtl">اردو</a></li>
+          <li><a href="bn/" hreflang="bn" lang="bn">বাংলা</a></li>
+          <li><a href="my/" hreflang="my" lang="my">မြန်မာ</a></li>
+          <li><a href="km/" hreflang="km" lang="km">ខ្មែរ</a></li>
+        </ul>
+        <!-- LANGS:END -->
+      </details>
       <span class="mast-progress" aria-hidden="true"></span>
     </header>
 
@@ -214,7 +256,7 @@
 </p>
 
 <div class="hero-foot">
-  <span>Linux <b>·</b> macOS <b>·</b> Windows</span>
+  <span translate="no">Linux <b>·</b> macOS <b>·</b> Windows</span>
   <span class="hero-chant" lang="ja"><i>臨</i><i>兵</i><i>闘</i><i>者</i><i>皆</i><i>陣</i><i>列</i><i>在</i><i>前</i></span>
 </div>
 
@@ -665,9 +707,15 @@
                 >
                 <div class="command-row">
                   <code id="command">kuji sim ransomware_fast</code
-                  ><button id="copy" type="button" hidden>Copy</button>
+                  ><button id="copy" type="button" data-t-copied="Copied" data-t-selected="Selected" hidden>Copy</button>
                 </div>
-                <span id="copy-status" class="sr-only" role="status"></span>
+                <span
+                  id="copy-status"
+                  class="sr-only"
+                  role="status"
+                  data-t-copied="Demo command copied."
+                  data-t-selected="Command selected. Use your device’s copy command."
+                ></span>
               </div>
             </div>
           </div>
@@ -682,7 +730,7 @@
                 role="group"
                 aria-label="Output of kuji sim ransomware_fast"
               >
-                <pre><code><span class="ln ln-cmd" style="--n: 24"><span class="ps1" aria-hidden="true">$ </span><span class="typed">kuji sim ransomware_fast</span><i class="caret" aria-hidden="true"></i></span
+                <pre lang="en" translate="no"><code><span class="ln ln-cmd" style="--n: 24"><span class="ps1" aria-hidden="true">$ </span><span class="typed">kuji sim ransomware_fast</span><i class="caret" aria-hidden="true"></i></span
 ><span class="ln ln-note">These are simulated events, and nothing here runs or touches a file.</span
 ><span class="ln ln-blank" aria-hidden="true"> </span
 ><span class="ln ln-head"><b>ATTACK</b> ransomware_fast (294 events)</span
@@ -728,9 +776,9 @@
             <div class="stage-foot">
               <button id="replay" type="button" hidden>
                 <span class="play-ico" aria-hidden="true"></span
-                ><span class="replay-label">Replay</span>
+                ><span class="replay-label" data-t-playing="Playing">Replay</span>
               </button>
-              <p id="play-status" role="status">294 events · 2 findings</p>
+              <p id="play-status" role="status" data-t-playing="Reading simulated events…">294 events · 2 findings</p>
             </div>
           </div>
         </div>
@@ -812,7 +860,7 @@
                         width="358"
                         height="376" /></span
                   ></span>
-                  <span class="sig-name">SORAMITSU</span>
+                  <span class="sig-name" translate="no">SORAMITSU</span>
                 </div>
                 <div class="sig">
                   <span class="sig-box"
@@ -968,7 +1016,7 @@
       <span class="foot-nine" lang="ja" aria-hidden="true"
         >臨 兵 闘 者 皆 陣 列 在 前</span
       >
-      <a class="foot-link" href="https://soramitsu.co.jp/">SORAMITSU</a>
+      <a class="foot-link" href="https://soramitsu.co.jp/" translate="no">SORAMITSU</a>
     </footer>
   </body>
 </html>

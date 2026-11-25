@@ -5,6 +5,9 @@
 // function of time, so skipping, replaying and resizing only ever call render()
 // with a different moment.
 (() => {
+  // Pictures are found from this script's own address, so the same script serves
+  // the English page at the root and each translation one folder down.
+  const here = document.currentScript ? document.currentScript.src : location.href;
   const hero = document.querySelector(".hero");
   const stage = hero && hero.querySelector(".hero-stage");
   const svg = stage && stage.querySelector("#hero-svg");
@@ -170,7 +173,7 @@
       });
       const piece = (file, width) =>
         svgEl("image", {
-          href: `assets/photo/${file}`,
+          href: new URL(`assets/photo/${file}`, here).href,
           x: 0,
           y: -GLOW,
           width,

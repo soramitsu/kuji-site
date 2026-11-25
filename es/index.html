@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0C0C0E" />
+    <title>KUJI クジ de SORAMITSU | Antivirus impulsado por IA</title>
+    <meta
+      name="description"
+      content="KUJI es un antivirus impulsado por IA para Windows, macOS y Linux. Ofrece análisis de archivos, detección por comportamiento y aprendizaje automático en tu equipo, incluso sin conexión. Explora el sistema y reproduce una simulación de ransomware."
+    />
+    <meta property="og:title" content="KUJI · IA en tu equipo. Aun sin conexión." />
+    <meta
+      property="og:description"
+      content="Conoce el sistema de SORAMITSU que funciona sin conexión en tu equipo y reproduce su simulación de ransomware."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://kuji.soramitsu.co.jp/assets/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Abe no Seimei alza dos dedos ante una luna bermellón, junto a la cuadrícula de nueve trazos de KUJI."
+    />
+    <meta property="og:url" content="https://kuji.soramitsu.co.jp/es/" />
+    <meta property="og:locale" content="es_ES" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://kuji.soramitsu.co.jp/es/" />
+    <!-- ALTERNATES:START -->
+    <link rel="alternate" hreflang="en" href="https://kuji.soramitsu.co.jp/" />
+    <link rel="alternate" hreflang="ja" href="https://kuji.soramitsu.co.jp/ja/" />
+    <link rel="alternate" hreflang="he" href="https://kuji.soramitsu.co.jp/he/" />
+    <link rel="alternate" hreflang="ar" href="https://kuji.soramitsu.co.jp/ar/" />
+    <link rel="alternate" hreflang="ru" href="https://kuji.soramitsu.co.jp/ru/" />
+    <link rel="alternate" hreflang="fr" href="https://kuji.soramitsu.co.jp/fr/" />
+    <link rel="alternate" hreflang="es" href="https://kuji.soramitsu.co.jp/es/" />
+    <link rel="alternate" hreflang="pt" href="https://kuji.soramitsu.co.jp/pt/" />
+    <link rel="alternate" hreflang="ur" href="https://kuji.soramitsu.co.jp/ur/" />
+    <link rel="alternate" hreflang="bn" href="https://kuji.soramitsu.co.jp/bn/" />
+    <link rel="alternate" hreflang="my" href="https://kuji.soramitsu.co.jp/my/" />
+    <link rel="alternate" hreflang="km" href="https://kuji.soramitsu.co.jp/km/" />
+    <link rel="alternate" hreflang="x-default" href="https://kuji.soramitsu.co.jp/" />
+    <!-- ALTERNATES:END -->
+    <link rel="icon" href="../assets/icon.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="../assets/sora-semibold.woff2"
+      crossorigin
+    />
+    <link rel="preload" as="image" href="../assets/photo/sky.webp" />
+    <link rel="preload" as="image" href="../assets/photo/seimei.webp" />
+    <script>
+      // Hold the words until the opening scene has played, and let go if its script never arrives.
+      if (
+        !matchMedia("(prefers-reduced-motion: reduce)").matches &&
+        (!location.hash || location.hash === "#top")
+      ) {
+        document.documentElement.classList.add("intro-pending");
+        window.kujiIntroBy = Date.now() + 4000;
+        setTimeout(function () {
+          if (!window.kujiHeroStarted) document.documentElement.classList.remove("intro-pending");
+        }, 4000);
+      }
+    </script>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../hero.css" />
+    <link rel="stylesheet" href="../nine.css" />
+    <link rel="stylesheet" href="../lang.css" />
+    <script src="../hero.js" defer></script>
+    <script src="../nine.js" defer></script>
+    <script src="../page.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Saltar al contenido</a>
+
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="shiki" viewBox="0 0 100 140">
+          <path
+            style="fill: var(--doll-fill, #f8f7f4)"
+            d="M50 2C60 2 67 10 67 20C67 28 62 34 56 37L59 43L97 58L88 82L67 70L78 134L22 134L33 70L12 82L3 58L41 43L44 37C38 34 33 28 33 20C33 10 40 2 50 2Z"
+          />
+          <path
+            style="fill: var(--doll-shade, rgba(12, 12, 14, 0.07))"
+            d="M50 2C60 2 67 10 67 20C67 28 62 34 56 37L59 43L97 58L88 82L67 70L78 134L50 134Z"
+          />
+          <path
+            d="M50 38V133"
+            fill="none"
+            stroke-width="1"
+            style="stroke: var(--doll-crease, rgba(12, 12, 14, 0.2))"
+          />
+        </symbol>
+      </defs>
+    </svg>
+
+    <header class="mast">
+      <a class="mast-home" href="#top" aria-label="Página de inicio de KUJI"
+        ><img
+          class="lockup"
+          src="../assets/lockup-reversed.svg"
+          width="118"
+          height="45"
+          alt=""
+      /></a>
+      <nav aria-label="Navegación principal">
+        <a href="#system">Cómo funciona</a><a href="#demo">Demo</a
+        ><a
+          class="nav-contact"
+          href="mailto:service@soramitsu.co.jp?subject=KUJI%20enquiry"
+          >Contacto</a
+        >
+      </nav>
+      <details class="lang">
+        <summary
+          ><svg class="lang-globe" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.200 3.300 3.200 14.700 0 18M12 3c-3.200 3.300-3.200 14.700 0 18"/></svg
+          ><span class="sr-only">Idioma: </span
+          ><!-- CURRENT:START --><span class="lang-current" lang="es" translate="no">Español</span><!-- CURRENT:END --></summary
+        >
+        <!-- LANGS:START -->
+        <ul class="lang-list" translate="no">
+          <li><a href="../" hreflang="en" lang="en">English</a></li>
+          <li><a href="../ja/" hreflang="ja" lang="ja">日本語</a></li>
+          <li><a href="../he/" hreflang="he" lang="he" dir="rtl">עברית</a></li>
+          <li><a href="../ar/" hreflang="ar" lang="ar" dir="rtl">العربية</a></li>
+          <li><a href="../ru/" hreflang="ru" lang="ru">Русский</a></li>
+          <li><a href="../fr/" hreflang="fr" lang="fr">Français</a></li>
+          <li><a href="../es/" hreflang="es" lang="es" aria-current="page">Español</a></li>
+          <li><a href="../pt/" hreflang="pt" lang="pt-BR">Português</a></li>
+          <li><a href="../ur/" hreflang="ur" lang="ur" dir="rtl">اردو</a></li>
+          <li><a href="../bn/" hreflang="bn" lang="bn">বাংলা</a></li>
+          <li><a href="../my/" hreflang="my" lang="my">မြန်မာ</a></li>
+          <li><a href="../km/" hreflang="km" lang="km">ខ្មែរ</a></li>
+        </ul>
+        <!-- LANGS:END -->
+      </details>
+      <span class="mast-progress" aria-hidden="true"></span>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <!-- HERO:START -->
+<div class="hero-stage" aria-hidden="true">
+  <div class="hs-world">
+    <img class="hs-l" id="hs-sky" data-depth=".3" style="--x:106;--y:-69;--w:1676;--h:1117" src="../assets/photo/sky.webp" width="1536" height="1024" alt="" decoding="async" fetchpriority="high" />
+    <img class="hs-l hs-soft" id="hs-sky-soft" data-depth=".3" style="--x:106;--y:-69;--w:1676;--h:1117" src="../assets/photo/sky-soft.webp" width="640" height="427" alt="" decoding="async" />
+    <div class="hs-l hs-mist hs-mist-far" data-depth=".16" style="--x:-2800;--y:520;--w:6804;--h:420;--n:3400;--tiles:6"><i></i></div>
+    <img class="hs-l hs-soft" id="hs-seimei-soft" style="--x:872;--y:92;--w:708;--h:1062" src="../assets/photo/seimei-soft.webp" width="341" height="512" alt="" decoding="async" />
+    <img class="hs-l" id="hs-seimei" style="--x:872;--y:92;--w:708;--h:1062" src="../assets/photo/seimei.webp" width="1024" height="1536" alt="" decoding="async" fetchpriority="high" />
+    <img class="hs-l hs-blink" style="--x:1163.08;--y:351.97;--w:72.6;--h:36.64" src="../assets/photo/seimei-eyes.webp" width="105" height="53" alt="" decoding="async" />
+    <div class="hs-l hs-floor" style="--x:-4000;--y:650;--w:9600;--h:3600;--n:480"></div>
+  </div>
+  <div class="hs-veil" id="hs-veil"></div>
+
+  <svg class="hero-svg" id="hero-svg" viewBox="-182 -86 1690 1056" preserveAspectRatio="xMaxYMax slice" focusable="false">
+    <defs>
+      <radialGradient id="h-latglow">
+        <stop offset="0" stop-color="#E3232C" stop-opacity=".5"/>
+        <stop offset=".5" stop-color="#E3232C" stop-opacity=".16"/>
+        <stop offset="1" stop-color="#E3232C" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="h-flashfill">
+        <stop offset="0" stop-color="#FFF4EC" stop-opacity=".85"/>
+        <stop offset=".3" stop-color="#FF8A78" stop-opacity=".4"/>
+        <stop offset="1" stop-color="#E3232C" stop-opacity="0"/>
+      </radialGradient>
+      <clipPath id="h-reveal">
+        <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
+        <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
+        <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
+        <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
+        <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
+        <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
+        <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
+        <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
+        <polygon class="h-clip" points="0,0 358,0 358,376 0,376"/>
+      </clipPath>
+    </defs>
+
+    <g id="h-kanji" fill="#E3232C">
+      <use class="h-kj" href="../assets/seals.svg#seal-1" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="../assets/seals.svg#seal-2" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="../assets/seals.svg#seal-3" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="../assets/seals.svg#seal-4" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="../assets/seals.svg#seal-5" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="../assets/seals.svg#seal-6" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="../assets/seals.svg#seal-7" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="../assets/seals.svg#seal-8" x="-150" y="-150" width="300" height="300"/>
+      <use class="h-kj" href="../assets/seals.svg#seal-9" x="-150" y="-150" width="300" height="300"/>
+    </g>
+
+    <g id="h-lattice" transform="translate(745 470) scale(.82) translate(-179 -188)">
+      <circle id="h-latglow-c" cx="179" cy="188" r="330" fill="url(#h-latglow)"/>
+      <circle id="h-ring" cx="179" cy="188" r="10" fill="none" stroke="#FF6A5C" stroke-width="1.6" opacity="0"/>
+      <circle id="h-flash" cx="179" cy="188" r="420" fill="url(#h-flashfill)" opacity="0"/>
+      <g id="h-halos" fill="none" stroke-linecap="round"></g>
+      <g clip-path="url(#h-reveal)">
+        <image id="h-mark" href="../assets/mark-reversed.svg" width="358" height="376"/>
+      </g>
+      <g id="h-cores" fill="none" stroke-linecap="round">
+        <path class="h-core" d="M12 57L341 50"/>
+        <path class="h-core" d="M68 12L69 368"/>
+        <path class="h-core" d="M11 124L341 121"/>
+        <path class="h-core" d="M137 11L140 366"/>
+        <path class="h-core" d="M12 192L342 188"/>
+        <path class="h-core" d="M211 9L213 365"/>
+        <path class="h-core" d="M13 258L342 253"/>
+        <path class="h-core" d="M284.500 7L289.500 364"/>
+        <path class="h-core" d="M13 322L342 318"/>
+      </g>
+    </g>
+
+    <path id="h-sparks-glow" fill="none" stroke-linecap="round" d=""/>
+    <path id="h-sparks" fill="none" stroke-linecap="round" d=""/>
+  </svg>
+
+  <img class="hs-hand" id="hs-hand" data-tip-x="200" data-tip-y="392" data-angle="26.1" data-unit="0.215" src="../assets/photo/hand.webp" width="1836" height="2600" alt="" decoding="async" />
+  <img class="hs-hand hs-hand-lit" id="hs-hand-lit" src="../assets/photo/hand-tip.webp" width="1010" height="1200" alt="" decoding="async" />
+
+  <div class="hs-world hs-world-front">
+    <div class="hs-l hs-mist hs-mist-near" data-depth="-.22" style="--x:-2600;--y:690;--w:6804;--h:360;--n:3400;--tiles:7"><i></i></div>
+    <div class="hs-l hs-motes" data-depth="-.12" style="--x:380;--y:60;--w:1240;--h:860;--n:1240"><i style="--mx:17.5%;--my:71.8%;--ms:0.83%;--mo:0.61;--md:11.2s;--mw:-15.1s;--mdx:2%"></i><i style="--mx:19.3%;--my:59.1%;--ms:0.94%;--mo:0.36;--md:18.3s;--mw:-8.1s;--mdx:-2%"></i><i style="--mx:76.6%;--my:36.1%;--ms:0.52%;--mo:0.37;--md:19.0s;--mw:-14.0s;--mdx:1%"></i><i style="--mx:59.9%;--my:20.7%;--ms:0.60%;--mo:0.62;--md:10.2s;--mw:-18.1s;--mdx:-1%"></i><i style="--mx:4.2%;--my:75.8%;--ms:0.42%;--mo:0.79;--md:9.2s;--mw:-3.1s;--mdx:3%"></i><i style="--mx:34.2%;--my:55.8%;--ms:0.49%;--mo:0.37;--md:17.7s;--mw:-4.5s;--mdx:-2%"></i><i style="--mx:21.6%;--my:93.6%;--ms:1.02%;--mo:0.77;--md:16.6s;--mw:-11.0s;--mdx:3%"></i><i style="--mx:8.7%;--my:61.7%;--ms:0.77%;--mo:0.56;--md:12.4s;--mw:-2.8s;--mdx:2%"></i><i style="--mx:40.5%;--my:46.5%;--ms:0.69%;--mo:0.56;--md:18.9s;--mw:-7.3s;--mdx:-3%"></i><i style="--mx:80.4%;--my:30.4%;--ms:0.89%;--mo:0.89;--md:9.0s;--mw:-1.3s;--mdx:2%"></i><i style="--mx:72.3%;--my:35.3%;--ms:0.81%;--mo:0.66;--md:15.2s;--mw:-3.4s;--mdx:-2%"></i><i style="--mx:60.9%;--my:83.0%;--ms:0.60%;--mo:0.77;--md:18.3s;--mw:-4.7s;--mdx:-2%"></i><i style="--mx:8.2%;--my:81.5%;--ms:0.93%;--mo:0.56;--md:15.8s;--mw:-12.8s;--mdx:3%"></i><i style="--mx:92.1%;--my:49.7%;--ms:1.09%;--mo:0.88;--md:14.9s;--mw:-16.8s;--mdx:1%"></i><i style="--mx:49.6%;--my:70.0%;--ms:1.05%;--mo:0.49;--md:14.6s;--mw:-8.3s;--mdx:1%"></i><i style="--mx:74.7%;--my:55.7%;--ms:0.98%;--mo:0.38;--md:11.6s;--mw:-5.5s;--mdx:1%"></i></div>
+    <span class="hs-doll" data-depth=".1" style="--x:668;--y:238;--r:-14;--s:.56"><img src="../assets/photo/doll-2.webp" width="700" height="980" alt="" decoding="async" /></span>
+    <span class="hs-doll hs-doll-far" data-depth=".22" style="--x:946;--y:176;--r:12;--s:.46"><img src="../assets/photo/doll-1.webp" width="700" height="980" alt="" decoding="async" /></span>
+    <span class="hs-doll hs-doll-near" data-depth="-.2" style="--x:512;--y:704;--r:18;--s:.74"><img src="../assets/photo/doll-3.webp" width="700" height="980" alt="" decoding="async" /></span>
+    <span class="hs-doll hs-doll-far" data-depth=".16" style="--x:700;--y:836;--r:-10;--s:.4;--ny:730"><img src="../assets/photo/doll-2.webp" width="700" height="980" alt="" decoding="async" /></span>
+  </div>
+  <div class="hs-grain"></div>
+  <div class="hs-vignette"></div>
+</div>
+<div class="hero-scrim" aria-hidden="true"></div>
+
+<p class="hero-card" aria-hidden="true"><span lang="ja">安倍晴明</span><b>Abe no Seimei</b></p>
+
+<div class="hero-copy">
+  <p class="hero-eyebrow"><span></span>Antivirus impulsado por IA, de SORAMITSU</p>
+  <h1 id="hero-title">IA en tu equipo<span>.</span><br />Aun sin conexión<span>.</span></h1>
+  <p class="hero-intro">
+    KUJI examina archivos y sigue la actividad de los programas. Sus modelos se ejecutan en tu equipo, incluso cuando no hay una red disponible.
+  </p>
+  <div class="hero-actions">
+    <a class="hero-button" href="#demo"><span class="hero-play" aria-hidden="true"></span>Ver la demo</a>
+    <button class="hero-replay" id="hero-replay" type="button" hidden>
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 12a8 8 0 1 0 2.6-5.900M4 4v4.500h4.500"/></svg> Repetir los nueve cortes
+    </button>
+  </div>
+</div>
+
+<p class="hero-plate">
+  <span lang="ja">安倍晴明</span> Abe no Seimei <small>Onmyōji de la corte (921–1005). Aquí corta el aire para trazar las nueve sílabas que dan nombre a KUJI.</small>
+</p>
+
+<div class="hero-foot">
+  <span translate="no">Linux <b>·</b> macOS <b>·</b> Windows</span>
+  <span class="hero-chant" lang="ja"><i>臨</i><i>兵</i><i>闘</i><i>者</i><i>皆</i><i>陣</i><i>列</i><i>在</i><i>前</i></span>
+</div>
+
+<button class="hero-skip" id="hero-skip" type="button" hidden>Saltar la introducción</button>
+<!-- HERO:END -->
+      </section>
+      <!-- NINE:START -->
+<section class="nine" id="nine" aria-labelledby="nine-title">
+  <div class="nine-layout">
+    <div class="nine-intro">
+      <p class="nine-label">El nombre</p>
+      <h2 class="nine-title" id="nine-title">Nueve sílabas<span>.</span><br />Nueve cortes<span>.</span></h2>
+      <p class="nine-description">
+        KUJI se escribe <span class="nine-name" lang="ja"><span class="nine-spoken">九字</span><svg viewBox="0 0 2000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-ku" width="1000" height="1000"/><use href="../assets/seals.svg#seal-ji" x="1000" width="1000" height="1000"/></svg></span> y significa «nueve sílabas». En el kuji-kiri se trazan con nueve cortes en el aire, alternando cinco horizontales y cuatro verticales. La cuadrícula que forman es el símbolo de KUJI.
+      </p>
+    </div>
+
+    <svg class="nine-print" viewBox="0 0 500 500" role="img" aria-labelledby="nine-print-title">
+      <title id="nine-print-title">Cuadrícula grabada de KUJI, formada por cinco cortes horizontales y cuatro verticales</title>
+      <path class="nine-register" fill="none" d="M26 41V26H41 M459 26H474V41 M474 459V474H459 M41 474H26V459" />
+      <svg class="nine-ghost" x="18" y="18" width="464" height="464" viewBox="0 0 1000 1000" aria-hidden="true">
+        <use href="../assets/seals.svg#seal-1" width="1000" height="1000" />
+      </svg>
+      <svg x="58" y="42" width="384" height="404" viewBox="0 0 358 376">
+        <defs>
+          <image id="nine-impression" href="../assets/mark.svg" width="358" height="376" />
+          <filter id="nine-color" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+            <feFlood class="nine-pigment" flood-color="#E3232C" />
+            <feComposite in2="SourceGraphic" operator="in" />
+          </filter>
+          <clipPath id="nine-drawn"></clipPath>
+          <clipPath id="nine-current"><rect x="-1.5" y="-1.5" width="0" height="35" /></clipPath>
+        </defs>
+        <use class="nine-ink" href="#nine-impression" />
+        <g class="nine-vermilion" clip-path="url(#nine-current)">
+          <use href="#nine-impression" filter="url(#nine-color)" />
+        </g>
+      </svg>
+      <g class="nine-chop" transform="translate(440 419) rotate(-4)">
+        <path fill="currentColor" d="M1 .8 26 0 26.8 42.6 1.4 43.2Z" />
+        <path fill="none" stroke="currentColor" stroke-width=".8" d="m-1-1.5 29-.3.6 46.4-29.2.8Z" />
+        <g class="nine-chop-type">
+          <use href="../assets/seals.svg#seal-ku" x="3" y="1" width="21" height="21" />
+          <use href="../assets/seals.svg#seal-ji" x="3" y="21" width="21" height="21" />
+        </g>
+      </g>
+      <pattern id="nine-fibre-tile" patternUnits="userSpaceOnUse" width="560" height="560">
+        <image href="../assets/photo/ink-fibre.webp" width="560" height="560" />
+      </pattern>
+      <rect class="nine-fibre" width="500" height="500" fill="url(#nine-fibre-tile)" />
+    </svg>
+
+    <div class="nine-controls">
+      <div class="nine-grid">
+        <button class="nine-cut" type="button" disabled>
+          <span class="nine-glyph" lang="ja"><span class="nine-spoken">臨</span><svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-1"/></svg></span>
+          <span class="nine-caption"><span class="nine-reading">rin</span><span class="nine-direction">Fila 1 →</span></span>
+        </button>
+        <button class="nine-cut" type="button" disabled>
+          <span class="nine-glyph" lang="ja"><span class="nine-spoken">兵</span><svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-2"/></svg></span>
+          <span class="nine-caption"><span class="nine-reading">pyō</span><span class="nine-direction">Columna 1 ↓</span></span>
+        </button>
+        <button class="nine-cut" type="button" disabled>
+          <span class="nine-glyph" lang="ja"><span class="nine-spoken">闘</span><svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-3"/></svg></span>
+          <span class="nine-caption"><span class="nine-reading">tō</span><span class="nine-direction">Fila 2 →</span></span>
+        </button>
+        <button class="nine-cut" type="button" disabled>
+          <span class="nine-glyph" lang="ja"><span class="nine-spoken">者</span><svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-4"/></svg></span>
+          <span class="nine-caption"><span class="nine-reading">sha</span><span class="nine-direction">Columna 2 ↓</span></span>
+        </button>
+        <button class="nine-cut" type="button" disabled>
+          <span class="nine-glyph" lang="ja"><span class="nine-spoken">皆</span><svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-5"/></svg></span>
+          <span class="nine-caption"><span class="nine-reading">kai</span><span class="nine-direction">Fila 3 →</span></span>
+        </button>
+        <button class="nine-cut" type="button" disabled>
+          <span class="nine-glyph" lang="ja"><span class="nine-spoken">陣</span><svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-6"/></svg></span>
+          <span class="nine-caption"><span class="nine-reading">jin</span><span class="nine-direction">Columna 3 ↓</span></span>
+        </button>
+        <button class="nine-cut" type="button" disabled>
+          <span class="nine-glyph" lang="ja"><span class="nine-spoken">列</span><svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-7"/></svg></span>
+          <span class="nine-caption"><span class="nine-reading">retsu</span><span class="nine-direction">Fila 4 →</span></span>
+        </button>
+        <button class="nine-cut" type="button" disabled>
+          <span class="nine-glyph" lang="ja"><span class="nine-spoken">在</span><svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-8"/></svg></span>
+          <span class="nine-caption"><span class="nine-reading">zai</span><span class="nine-direction">Columna 4 ↓</span></span>
+        </button>
+        <button class="nine-cut" type="button" disabled>
+          <span class="nine-glyph" lang="ja"><span class="nine-spoken">前</span><svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="../assets/seals.svg#seal-9"/></svg></span>
+          <span class="nine-caption"><span class="nine-reading">zen</span><span class="nine-direction">Fila 5 →</span></span>
+        </button>
+      </div>
+      <button class="nine-replay" type="button" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1.4 7.1M4 4.5v6h6"/></svg> Hacer los nueve cortes
+      </button>
+    </div>
+  </div>
+</section>
+<!-- NINE:END -->
+
+      <section
+        class="band dark system"
+        id="system"
+        aria-labelledby="system-title"
+        data-live
+      >
+        <img
+          class="system-emblem"
+          src="../assets/emblem-reversed.svg"
+          alt=""
+          width="512"
+          height="512"
+          loading="lazy"
+        />
+        <div class="wrap">
+          <header class="sec-head" data-reveal>
+            <p class="section-label">
+              <span class="jp" lang="ja" aria-hidden="true">証拠</span>Análisis en el equipo
+            </p>
+            <h2 id="system-title">
+              ¿Qué hace sospechoso<br />a un programa<span>?</span>
+            </h2>
+          </header>
+
+          <ol class="evidence" role="list">
+            <li class="evi" data-reveal="card" style="--i: 0">
+              <span class="evi-doll" aria-hidden="true"
+                ><img class="pdoll" src="../assets/photo/doll-1-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+                /><span class="doll-num" lang="ja">一</span></span
+              >
+              <div class="vis" aria-hidden="true">
+                <svg class="v v-file" viewBox="0 0 260 170" focusable="false">
+                  <path
+                    d="M22 12H146L172 38V158H22Z"
+                    fill="#fff"
+                    stroke="#0C0C0E"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M146 12V38H172"
+                    fill="none"
+                    stroke="#0C0C0E"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                  <g fill="#0C0C0E">
+                    <rect x="34" y="24" width="56" height="7" rx="1" />
+                    <rect x="34" y="36" width="28" height="7" rx="1" />
+                    <rect x="66" y="36" width="40" height="7" rx="1" />
+                  </g>
+                  <g fill="#D7D1C3"><rect x="34" y="56" width="7" height="7"/><rect x="44.5" y="56" width="7" height="7"/><rect x="55" y="56" width="7" height="7"/><rect x="65.5" y="56" width="7" height="7"/><rect x="76" y="56" width="7" height="7"/><rect x="86.5" y="56" width="7" height="7"/><rect x="97" y="56" width="7" height="7"/><rect x="107.5" y="56" width="7" height="7"/><rect x="118" y="56" width="7" height="7"/><rect x="128.5" y="56" width="7" height="7"/><rect x="139" y="56" width="7" height="7"/><rect x="149.5" y="56" width="7" height="7"/><rect x="34" y="70" width="7" height="7"/><rect x="44.5" y="70" width="7" height="7"/><rect x="55" y="70" width="7" height="7"/><rect x="65.5" y="70" width="7" height="7"/><rect x="76" y="70" width="7" height="7"/><rect x="86.5" y="70" width="7" height="7"/><rect x="97" y="70" width="7" height="7"/><rect x="107.5" y="70" width="7" height="7"/><rect x="118" y="70" width="7" height="7"/><rect x="128.5" y="70" width="7" height="7"/><rect x="139" y="70" width="7" height="7"/><rect x="149.5" y="70" width="7" height="7"/><rect x="34" y="84" width="7" height="7"/><rect x="44.5" y="84" width="7" height="7"/><rect x="55" y="84" width="7" height="7"/><rect x="65.5" y="84" width="7" height="7"/><rect x="76" y="84" width="7" height="7"/><rect x="86.5" y="84" width="7" height="7"/><rect x="139" y="84" width="7" height="7"/><rect x="149.5" y="84" width="7" height="7"/><rect x="34" y="98" width="7" height="7"/><rect x="44.5" y="98" width="7" height="7"/><rect x="55" y="98" width="7" height="7"/><rect x="65.5" y="98" width="7" height="7"/><rect x="76" y="98" width="7" height="7"/><rect x="86.5" y="98" width="7" height="7"/><rect x="97" y="98" width="7" height="7"/><rect x="107.5" y="98" width="7" height="7"/><rect x="118" y="98" width="7" height="7"/><rect x="128.5" y="98" width="7" height="7"/><rect x="139" y="98" width="7" height="7"/><rect x="149.5" y="98" width="7" height="7"/><rect x="34" y="112" width="7" height="7"/><rect x="44.5" y="112" width="7" height="7"/><rect x="55" y="112" width="7" height="7"/><rect x="65.5" y="112" width="7" height="7"/><rect x="76" y="112" width="7" height="7"/><rect x="86.5" y="112" width="7" height="7"/><rect x="97" y="112" width="7" height="7"/><rect x="107.5" y="112" width="7" height="7"/><rect x="118" y="112" width="7" height="7"/><rect x="128.5" y="112" width="7" height="7"/><rect x="139" y="112" width="7" height="7"/><rect x="149.5" y="112" width="7" height="7"/><rect x="34" y="126" width="7" height="7"/><rect x="44.5" y="126" width="7" height="7"/><rect x="55" y="126" width="7" height="7"/><rect x="65.5" y="126" width="7" height="7"/><rect x="76" y="126" width="7" height="7"/><rect x="86.5" y="126" width="7" height="7"/><rect x="97" y="126" width="7" height="7"/><rect x="107.5" y="126" width="7" height="7"/><rect x="149.5" y="126" width="7" height="7"/><rect x="34" y="140" width="7" height="7"/><rect x="44.5" y="140" width="7" height="7"/><rect x="55" y="140" width="7" height="7"/><rect x="65.5" y="140" width="7" height="7"/><rect x="76" y="140" width="7" height="7"/><rect x="86.5" y="140" width="7" height="7"/><rect x="97" y="140" width="7" height="7"/><rect x="107.5" y="140" width="7" height="7"/><rect x="118" y="140" width="7" height="7"/><rect x="128.5" y="140" width="7" height="7"/><rect x="139" y="140" width="7" height="7"/><rect x="149.5" y="140" width="7" height="7"/></g>
+                  <g class="a-hit h1" fill="#E3232C"><rect x="97" y="84" width="7" height="7"/><rect x="107.5" y="84" width="7" height="7"/><rect x="118" y="84" width="7" height="7"/><rect x="128.5" y="84" width="7" height="7"/></g>
+                  <g class="a-hit h2" fill="#E3232C"><rect x="118" y="126" width="7" height="7"/><rect x="128.5" y="126" width="7" height="7"/><rect x="139" y="126" width="7" height="7"/></g>
+                  <g fill="none" stroke="#0C0C0E" stroke-width="1.5">
+                    <rect x="186" y="50" width="60" height="34" rx="2" fill="#fff" />
+                    <rect x="186" y="104" width="60" height="34" rx="2" fill="#fff" />
+                  </g>
+                  <g class="rc rc1" fill="#E3232C">
+                    <rect x="193" y="63" width="8" height="8" />
+                    <rect x="205" y="63" width="8" height="8" />
+                    <rect x="217" y="63" width="8" height="8" />
+                    <rect x="229" y="63" width="8" height="8" />
+                  </g>
+                  <g class="rc rc2" fill="#E3232C">
+                    <rect x="199" y="117" width="8" height="8" />
+                    <rect x="211" y="117" width="8" height="8" />
+                    <rect x="223" y="117" width="8" height="8" />
+                  </g>
+                  <g
+                    fill="none"
+                    stroke="#E3232C"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  >
+                    <path class="a-draw c1" pathLength="1" d="M137 88C160 88 164 67 186 67" />
+                    <path class="a-draw c2" pathLength="1" d="M147 130C165 130 168 121 186 121" />
+                  </g>
+                  <g class="scan" opacity="0">
+                    <rect x="22" y="-16" width="150" height="16" fill="#E3232C" opacity=".12" />
+                    <rect x="22" y="-7" width="150" height="7" fill="#E3232C" opacity=".18" />
+                    <rect x="18" y="0" width="158" height="2" fill="#E3232C" />
+                  </g>
+                </svg>
+              </div>
+              <h3>Dentro del archivo</h3>
+              <p>
+                KUJI compara la estructura de los ejecutables y los patrones de bytes con las reglas de detección. Para los programas de Windows y Mac, un modelo que se ejecuta en el equipo añade una puntuación de riesgo y señala los que se salen de lo habitual para que alguien los revise.
+              </p>
+            </li>
+
+            <li class="evi" data-reveal="card" style="--i: 1">
+              <span class="evi-doll" aria-hidden="true"
+                ><img class="pdoll" src="../assets/photo/doll-2-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+                /><span class="doll-num" lang="ja">二</span></span
+              >
+              <div class="vis" aria-hidden="true">
+                <svg class="v v-run" viewBox="0 0 260 170" focusable="false">
+                  <g
+                    fill="none"
+                    stroke="#0C0C0E"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  >
+                    <path class="a-draw e1" pathLength="1" d="M44 80L92 54" />
+                    <path class="a-draw e2" pathLength="1" d="M44 92L92 118" />
+                    <path class="a-draw e3" pathLength="1" d="M108 47C122 40 132 37 144 37" />
+                    <path class="a-draw e4" pathLength="1" d="M108 124C130 129 150 128 172 124" />
+                  </g>
+                  <g fill="#0C0C0E">
+                    <circle class="a-pop n1" cx="36" cy="86" r="9" />
+                    <circle class="a-pop n2" cx="100" cy="50" r="8" />
+                    <circle class="a-pop n3" cx="100" cy="122" r="8" />
+                  </g>
+                  <g
+                    class="a-fade docs"
+                    fill="#fff"
+                    stroke="#0C0C0E"
+                    stroke-width="1.6"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M148 18h16l6 6v24h-22z" />
+                    <path d="M176 26h16l6 6v24h-22z" />
+                    <path d="M204 18h16l6 6v24h-22z" />
+                  </g>
+                  <g
+                    class="a-fade docs"
+                    fill="none"
+                    stroke="#0C0C0E"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    opacity=".3"
+                  >
+                    <path d="M152 29h12M152 35h14M152 41h9" />
+                    <path d="M180 37h12M180 43h14M180 49h9" />
+                    <path d="M208 29h12M208 35h14M208 41h9" />
+                  </g>
+                  <g
+                    fill="none"
+                    stroke="#E3232C"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  >
+                    <path class="a-draw w1" pathLength="1" d="M152 29h12" />
+                    <path class="a-draw w2" pathLength="1" d="M152 35h14" />
+                    <path class="a-draw w3" pathLength="1" d="M180 37h12" />
+                    <path class="a-draw w4" pathLength="1" d="M180 43h14" />
+                    <path class="a-draw w5" pathLength="1" d="M208 29h12" />
+                    <path class="a-draw w6" pathLength="1" d="M208 35h14" />
+                  </g>
+                  <g
+                    class="a-fade bk"
+                    fill="none"
+                    stroke="#0C0C0E"
+                    stroke-width="1.8"
+                  >
+                    <ellipse cx="196" cy="108" rx="22" ry="6" fill="#fff" />
+                    <path d="M174 108v28c0 3.3 9.8 6 22 6s22-2.7 22-6v-28" />
+                    <path d="M174 118c0 3.3 9.8 6 22 6s22-2.7 22-6M174 128c0 3.3 9.8 6 22 6s22-2.7 22-6" />
+                  </g>
+                  <g
+                    fill="none"
+                    stroke="#E3232C"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                  >
+                    <path class="a-draw s1" pathLength="1" d="M170 100L222 150" />
+                    <path class="a-draw s2" pathLength="1" d="M222 100L170 150" />
+                  </g>
+                  <path
+                    class="a-draw link"
+                    pathLength="1"
+                    d="M236 34C256 62 256 104 232 128"
+                    fill="none"
+                    stroke="#E3232C"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                  <circle class="a-pop ld" cx="250" cy="81" r="4" fill="#E3232C" />
+                </svg>
+              </div>
+              <h3>Durante la ejecución</h3>
+              <p>
+                Varios eventos relacionados pueden revelar algo distinto de lo que muestra un archivo por sí solo. KUJI busca patrones como la reescritura de documentos mientras un proceso relacionado apunta a las copias de seguridad.
+              </p>
+            </li>
+
+            <li class="evi" data-reveal="card" style="--i: 2">
+              <span class="evi-doll" aria-hidden="true"
+                ><img class="pdoll" src="../assets/photo/doll-3-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+                /><span class="doll-num" lang="ja">三</span></span
+              >
+              <div class="vis" aria-hidden="true">
+                <svg class="v v-host" viewBox="0 0 260 170" focusable="false">
+                  <defs>
+                    <mask id="mask-lead" maskUnits="userSpaceOnUse">
+                      <path
+                        class="a-draw lead-mask"
+                        pathLength="1"
+                        d="M148 72C172 63 192 64 212 72"
+                        fill="none"
+                        stroke="#fff"
+                        stroke-width="8"
+                      />
+                    </mask>
+                  </defs>
+                  <rect
+                    x="10"
+                    y="12"
+                    width="178"
+                    height="146"
+                    rx="14"
+                    fill="none"
+                    stroke="#0C0C0E"
+                    stroke-opacity=".35"
+                    stroke-width="1.5"
+                    stroke-dasharray="5 5"
+                  />
+                  <g
+                    class="clock"
+                    fill="none"
+                    stroke="#0C0C0E"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  >
+                    <circle cx="36" cy="38" r="12" fill="#fff" />
+                    <path class="hand" d="M36 38V29" />
+                    <path d="M36 38h0.01" stroke-width="4" />
+                  </g>
+                  <g
+                    fill="none"
+                    stroke="#0C0C0E"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  >
+                    <path class="a-draw l1" pathLength="1" d="M84 42L140 74" />
+                    <path class="a-draw l2" pathLength="1" d="M84 42L74 104" />
+                    <path class="a-draw l3" pathLength="1" d="M74 104L130 128" />
+                    <path class="a-draw l4" pathLength="1" d="M140 74L130 128" />
+                  </g>
+                  <path
+                    d="M32 128L74 104"
+                    fill="none"
+                    stroke="#0C0C0E"
+                    stroke-opacity=".35"
+                    stroke-width="1.6"
+                    stroke-dasharray="3 4"
+                  />
+                  <g fill="#0C0C0E">
+                    <circle class="a-pop p1" cx="84" cy="42" r="7" />
+                    <circle class="a-pop p2" cx="140" cy="74" r="8" />
+                    <circle class="a-pop p3" cx="74" cy="104" r="7" />
+                    <circle class="a-pop p4" cx="130" cy="128" r="7" />
+                  </g>
+                  <circle
+                    class="a-pop p5"
+                    cx="32"
+                    cy="128"
+                    r="7"
+                    fill="#fff"
+                    stroke="#0C0C0E"
+                    stroke-opacity=".45"
+                    stroke-width="1.6"
+                  />
+                  <g
+                    fill="none"
+                    stroke="#E3232C"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                  >
+                    <path class="a-draw x1" pathLength="1" d="M48 110l10 10" />
+                    <path class="a-draw x2" pathLength="1" d="M58 110l-10 10" />
+                  </g>
+                  <path
+                    mask="url(#mask-lead)"
+                    d="M148 72C172 63 192 64 212 72"
+                    fill="none"
+                    stroke="#E3232C"
+                    stroke-width="2"
+                    stroke-dasharray="4 4"
+                  />
+                  <g
+                    class="a-fade srv"
+                    fill="#fff"
+                    stroke="#0C0C0E"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  >
+                    <rect x="214" y="58" width="26" height="34" rx="2" />
+                    <path d="M219 66h16M219 74h16M219 82h16" fill="none" />
+                  </g>
+                  <circle
+                    class="ring"
+                    cx="227"
+                    cy="75"
+                    r="24"
+                    fill="none"
+                    stroke="#E3232C"
+                    stroke-width="1.6"
+                    opacity=".5"
+                  />
+                  <circle class="a-pop ldot" cx="240" cy="56" r="4.5" fill="#E3232C" />
+                </svg>
+              </div>
+              <h3>En este equipo</h3>
+              <p>
+                Si una herramienta de copias de seguridad se comunica con un servidor poco habitual, quienes investigan tienen una pista. KUJI deja pasar un tiempo antes de aprender las relaciones que observa en el equipo y excluye de ese aprendizaje la actividad vinculada a incidentes.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="band paper demo" id="demo" aria-labelledby="demo-title">
+        <div class="wrap">
+          <div class="demo-intro">
+            <header class="sec-head" data-reveal>
+              <p class="section-label">
+                <span class="jp" lang="ja" aria-hidden="true">再現</span
+                >Detección por comportamiento
+              </p>
+              <h2 id="demo-title">
+                Reproduce un patrón<br />de ransomware<span>.</span>
+              </h2>
+            </header>
+            <div class="demo-copy" data-reveal style="--i: 1">
+              <p class="lede">
+                Mira en esta grabación cómo se ejecuta sin conexión la demo de KUJI. Un programa reescribe documentos en varias carpetas mientras un proceso relacionado apunta a las copias de seguridad.
+              </p>
+              <p class="lede">
+                KUJI relaciona estos eventos e informa de dos hallazgos críticos. Los 294 eventos son simulados.
+              </p>
+              <div class="command">
+                <span class="command-label"
+                  >Si tienes KUJI instalado, ejecuta tú la demo</span
+                >
+                <div class="command-row">
+                  <code id="command">kuji sim ransomware_fast</code
+                  ><button id="copy" type="button" data-t-copied="Copiado" data-t-selected="Seleccionado" hidden>Copiar</button>
+                </div>
+                <span
+                  id="copy-status"
+                  class="sr-only"
+                  role="status"
+                  data-t-copied="Se ha copiado el comando de la demo."
+                  data-t-selected="Comando seleccionado. Usa la opción de copiar de tu dispositivo."
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="stage" id="stage" data-live>
+            <div class="stage-bar">
+              <span>KUJI / Simulación</span><span class="rec">Grabada</span>
+            </div>
+            <div class="stage-body">
+              <div
+                class="term"
+                role="group"
+                aria-label="Salida de kuji sim ransomware_fast"
+              >
+                <pre lang="en" translate="no"><code><span class="ln ln-cmd" style="--n: 24"><span class="ps1" aria-hidden="true">$ </span><span class="typed">kuji sim ransomware_fast</span><i class="caret" aria-hidden="true"></i></span
+><span class="ln ln-note">These are simulated events, and nothing here runs or touches a file.</span
+><span class="ln ln-blank" aria-hidden="true"> </span
+><span class="ln ln-head"><b>ATTACK</b> ransomware_fast (294 events)</span
+><span class="ln ln-find">  <b>[Critical]</b> <i>motif.recovery_destruction</i>: Backups or recovery are being destroyed</span
+><span class="ln ln-find">  <b>[Critical]</b> <i>motif.destructive_modification</i>: Possible destructive file activity</span
+><span class="ln ln-model">  Behavior model scored 3 windows. 3 crossed its advisory threshold.</span
+><span class="ln ln-model">  Advisory for process group /tmp/svc1 (root PID 2012).</span
+><span class="ln ln-model">    files created (1), files overwritten (96), Distinct directories written to (13), Bytes written (6292356), renames (96), extension changes (96)</span
+><span class="ln ln-prompt" aria-hidden="true">$ <i class="caret"></i></span></code></pre>
+              </div>
+              <div class="field" aria-hidden="true">
+                <div class="field-head">
+                  <span>Eventos simulados</span
+                  ><span class="count"
+                    ><b class="count-num">294</b><span>/ 294</span></span
+                  >
+                </div>
+                <div class="marks"></div>
+              </div>
+              <div class="slips" aria-hidden="true">
+                <div class="slip" style="--rot: -6deg">
+                  <span class="stamp"
+                    ><img src="../assets/seal.svg" alt="" width="358" height="376"
+                  /></span>
+                  <div class="slip-text">
+                    <span class="slip-sev">Crítico</span>
+                    <p>Se están destruyendo copias de seguridad o recursos de recuperación</p>
+                    <code>motif.recovery_destruction</code>
+                  </div>
+                </div>
+                <div class="slip" style="--rot: 5deg">
+                  <span class="stamp"
+                    ><img src="../assets/seal.svg" alt="" width="358" height="376"
+                  /></span>
+                  <div class="slip-text">
+                    <span class="slip-sev">Crítico</span>
+                    <p>Posible actividad destructiva en archivos</p>
+                    <code>motif.destructive_modification</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="stage-foot">
+              <button id="replay" type="button" hidden>
+                <span class="play-ico" aria-hidden="true"></span
+                ><span class="replay-label" data-t-playing="Reproduciendo">Repetir</span>
+              </button>
+              <p id="play-status" role="status" data-t-playing="Leyendo eventos simulados…">294 eventos · 2 hallazgos</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band paper-2 app" aria-labelledby="app-title">
+        <div class="wrap app-grid">
+          <div class="app-copy" data-reveal>
+            <p class="section-label">
+              <span class="jp" lang="ja" aria-hidden="true">走査</span>La aplicación local
+            </p>
+            <h2 id="app-title">El análisis<br />empieza aquí<span>.</span></h2>
+            <p class="lede">
+              Un análisis rápido revisa la carpeta Descargas, el escritorio, los archivos temporales y las ubicaciones de inicio. Elige un análisis completo para revisar los discos locales. La aplicación te muestra los hallazgos y te indica dónde la cobertura es incompleta.
+            </p>
+          </div>
+          <div class="app-stage" data-reveal="stack">
+            <span class="sheet sheet-a" aria-hidden="true"></span>
+            <span class="sheet sheet-b" aria-hidden="true"></span>
+            <span class="peek" aria-hidden="true"
+              ><img class="pdoll" src="../assets/photo/doll-3-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+            /></span>
+            <figure class="app-view">
+              <img class="tape" src="../assets/photo/tape-400.webp" alt="" width="400" height="120" loading="lazy" decoding="async" />
+              <img
+                src="../assets/kuji-app.webp"
+                alt="Pantalla de estado de la aplicación de KUJI con los controles para iniciar un análisis rápido o completo."
+                width="610"
+                height="728"
+                loading="lazy"
+              />
+              <figcaption>Aplicación de escritorio de KUJI <span>/</span> Vista de estado</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="band dark updates" aria-labelledby="updates-title">
+        <div class="wrap updates-grid">
+          <div class="update-copy" data-reveal>
+            <p class="section-label">
+              <span class="jp" lang="ja" aria-hidden="true">署名</span
+              >Actualizaciones para equipos aislados
+            </p>
+            <h2 id="updates-title">
+              Lleva la actualización<br />al equipo aislado<span>.</span>
+            </h2>
+            <p class="lede">
+              Lleva una versión firmada en un medio extraíble o distribúyela por la red interna mediante un recurso compartido o un portal. Antes de aceptar la versión, KUJI verifica tanto las firmas de SORAMITSU como las de tu organización.
+            </p>
+          </div>
+          <div class="gap-scene" data-reveal="scene">
+            <figure class="print">
+              <img
+                src="../assets/media.webp"
+                width="1000"
+                height="1000"
+                loading="lazy"
+                alt="Una unidad USB extraíble con un cordón bermellón."
+              />
+            </figure>
+            <div class="release" aria-hidden="true">
+              <p class="release-kicker">Versión firmada</p>
+              <span class="release-lines"><i></i><i></i><i></i><i></i></span>
+              <div class="sigs">
+                <div class="sig">
+                  <span class="sig-box"
+                    ><span class="stamp" style="--rot: -7deg"
+                      ><img
+                        src="../assets/seal.svg"
+                        alt=""
+                        width="358"
+                        height="376" /></span
+                  ></span>
+                  <span class="sig-name" translate="no">SORAMITSU</span>
+                </div>
+                <div class="sig">
+                  <span class="sig-box"
+                    ><span class="stamp" style="--rot: 4deg"
+                      ><img
+                        src="../assets/seal.svg"
+                        alt=""
+                        width="358"
+                        height="376" /></span
+                  ></span>
+                  <span class="sig-name">Tu organización</span>
+                </div>
+              </div>
+              <p class="accepted">
+                <span class="accepted-jp" lang="ja">受理</span
+                ><span>Aceptada</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="band paper facts" aria-labelledby="facts-title">
+        <div class="wrap">
+          <h2 class="section-label" id="facts-title" data-reveal>
+            <span class="jp" lang="ja" aria-hidden="true">事実</span>Los hechos
+          </h2>
+          <ul class="facts-list" role="list">
+            <li data-reveal="fact" style="--i: 0">
+              <span class="fact-top" aria-hidden="true"
+                ><span class="fact-num" lang="ja">一</span
+                ><svg class="fact-ico" viewBox="0 0 48 48" focusable="false">
+                  <circle pathLength="1" cx="24" cy="24" r="16" />
+                  <ellipse pathLength="1" cx="24" cy="24" rx="7" ry="16" />
+                  <path pathLength="1" d="M8 24h32" />
+                  <path class="r" pathLength="1" d="M9 39L39 9" /></svg
+              ></span>
+              <p>
+                <strong>Funciona sin acceso a internet.</strong> Nada sale del equipo por sí solo.
+              </p>
+            </li>
+            <li data-reveal="fact" style="--i: 1">
+              <span class="fact-top" aria-hidden="true"
+                ><span class="fact-num" lang="ja">二</span
+                ><svg class="fact-ico" viewBox="0 0 48 48" focusable="false">
+                  <path pathLength="1" d="M24 11C17 11 10 15 4 24C10 33 17 37 24 37" />
+                  <path class="dash" d="M24 11C31 11 38 15 44 24C38 33 31 37 24 37" />
+                  <circle pathLength="1" cx="24" cy="24" r="6" />
+                  <path class="r" pathLength="1" d="M24 5V43" /></svg
+              ></span>
+              <p>
+                <strong>Indica lo que no puede ver.</strong> <code>kuji coverage</code> detalla la cobertura de este equipo en concreto. Ningún análisis emite un veredicto de «limpio».
+              </p>
+            </li>
+            <li data-reveal="fact" style="--i: 2">
+              <span class="fact-top" aria-hidden="true"
+                ><span class="fact-num" lang="ja">三</span
+                ><svg class="fact-ico" viewBox="0 0 48 48" focusable="false">
+                  <rect pathLength="1" x="5" y="9" width="22" height="22" rx="2" />
+                  <rect class="r" pathLength="1" x="21" y="18" width="22" height="22" rx="2" /></svg
+              ></span>
+              <p>
+                <strong>Cada firma combina <span class="nowrap">Ed25519</span> y <span class="nowrap">ML-DSA-65</span>.</strong>
+              </p>
+            </li>
+            <li data-reveal="fact" style="--i: 3">
+              <span class="fact-top" aria-hidden="true"
+                ><span class="fact-num" lang="ja">四</span
+                ><svg class="fact-ico" viewBox="0 0 48 48" focusable="false">
+                  <rect pathLength="1" x="4" y="11" width="18" height="26" rx="3" />
+                  <rect class="r" pathLength="1" x="26" y="11" width="18" height="26" rx="3" />
+                  <path class="r" pathLength="1" d="M30 19h10M30 29h10M35 15v18" /></svg
+              ></span>
+              <p>
+                <strong>Funciona junto con las herramientas de seguridad que ya tienes.</strong> No las reemplaza.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section
+        class="band dark contact"
+        aria-labelledby="contact-title"
+        data-live
+      >
+        <div class="sky" aria-hidden="true" data-reveal="sky">
+          <span class="moon"></span>
+          <svg class="dipper" viewBox="0 0 300 160" focusable="false">
+            <path
+              class="dipper-line"
+              pathLength="1"
+              d="M20 30L75 48L118 58L160 72L250 80L238 128L170 118L160 72"
+            />
+            <g class="stars">
+              <circle cx="20" cy="30" r="2.6" />
+              <circle cx="75" cy="48" r="2.8" />
+              <circle cx="118" cy="58" r="2.6" />
+              <circle cx="160" cy="72" r="2.2" />
+              <circle cx="250" cy="80" r="3" />
+              <circle cx="238" cy="128" r="2.8" />
+              <circle cx="170" cy="118" r="2.6" />
+            </g>
+          </svg>
+          <span class="mist mist-1"></span>
+          <span class="mist mist-2"></span>
+          <span class="mist mist-3"></span>
+          <span class="flyer flyer-1"
+            ><img class="pdoll" src="../assets/photo/doll-2-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+          /></span>
+          <span class="flyer flyer-2"
+            ><img class="pdoll" src="../assets/photo/doll-1-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+          /></span>
+          <span class="flyer flyer-3"
+            ><img class="pdoll" src="../assets/photo/doll-3-240.webp" alt="" width="240" height="336" loading="lazy" decoding="async"
+          /></span>
+        </div>
+        <div class="wrap contact-inner">
+          <div class="contact-copy" data-reveal>
+            <p class="section-label">
+              <span class="jp" lang="ja" aria-hidden="true">連絡</span>KUJI de SORAMITSU
+            </p>
+            <h2 id="contact-title">
+              Lleva KUJI<br />a tu equipo de trabajo<span>.</span>
+            </h2>
+            <a
+              class="button primary"
+              href="mailto:service@soramitsu.co.jp?subject=KUJI%20enquiry"
+              >Contacta con SORAMITSU<span class="arrow" aria-hidden="true"></span
+            ></a>
+          </div>
+          <div class="cta-mascot" aria-hidden="true">
+            <img src="../assets/photo/seimei.webp" alt="" width="1024" height="1536" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <a class="foot-home" href="#top"
+        ><img
+          src="../assets/lockup-reversed.svg"
+          width="105"
+          height="40"
+          alt="Página de inicio de KUJI"
+      /></a>
+      <span class="foot-nine" lang="ja" aria-hidden="true"
+        >臨 兵 闘 者 皆 陣 列 在 前</span
+      >
+      <a class="foot-link" href="https://soramitsu.co.jp/" translate="no">SORAMITSU</a>
+    </footer>
+  </body>
+</html>

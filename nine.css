@@ -45,8 +45,9 @@
 }
 .nine-title {
   margin: 0;
-  font: 600 clamp(40px, 4.3vw, 80px) / 1.09 var(--sans, Sora, Arial, sans-serif);
-  letter-spacing: -0.065em;
+  font: 600 calc(clamp(40px, 4.3vw, 80px) * var(--head-scale, 1)) / calc(1.09 * var(--head-leading, 1))
+    var(--sans, Sora, Arial, sans-serif);
+  letter-spacing: calc(-0.065em * var(--head-track, 1));
 }
 .nine-title span {
   color: var(--shu, #e3232c);
